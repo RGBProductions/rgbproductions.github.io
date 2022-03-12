@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Righteous;
+    src: url("fonts/Righteous-Regular.ttf");
+}
+
+body {
+    background-color: #28282a;
+    color: white;
+    font-family: Righteous;
+}
+
+img {
+    padding-bottom: 50px
+}
