@@ -1,6 +1,6 @@
 @font-face {
     font-family: Righteous;
-    src: url("fonts/Righteous-Regular.ttf");
+    src: url("../fonts/Righteous-Regular.ttf");
 }
 
 body {
@@ -9,6 +9,21 @@ body {
     font-family: Righteous;
 }
 
+.inline {
+    display: inline;
+}
+
 img {
     padding-bottom: 50px
+}
+
+div.item {
+    outline: 1px solid white;
+    /* text-align: left; */
+    padding-left: 5px;
+}
+
+a {
+    color: #2d77ff;
+    font-size: large;
 }
