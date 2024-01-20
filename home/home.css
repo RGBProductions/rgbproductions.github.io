@@ -24,7 +24,9 @@ p#feedMissing {
 }
 
 #logo {
-    width: min(100%, 640px);
+    margin: 8px;
+    margin-bottom: 32px;
+    width: min(65%, 640px);
 }
 
 a.feedlink {

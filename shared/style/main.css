@@ -45,24 +45,6 @@ button:hover {
     cursor: pointer;
 }
 
-@media screen and (max-width: 616px) {
-    #openmenu {
-        display: initial !important;
-    }
-
-    .changetheme.mobile {
-        display: initial !important;
-    }
-
-    #topbar {
-        display: none !important;
-    }
-
-    #page-content {
-        top: 8px !important;
-    }
-}
-
 #page-content {
     position: absolute;
     top: 96px;
@@ -185,4 +167,22 @@ img {
 
 .light img.themed {
     filter: brightness(0);
+}
+
+@media screen and (max-width: 616px) {
+    #openmenu {
+        display: initial !important;
+    }
+
+    .changetheme.mobile {
+        display: initial !important;
+    }
+
+    #topbar {
+        display: none !important;
+    }
+
+    #page-content {
+        top: 8px !important;
+    }
 }
