@@ -1,0 +1,17 @@
+#abouttext {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.aboutrow {
+    margin-bottom: 2em;
+}
+
+.aboutrow > p {
+    font-size: 24px;
+}
+
+.aboutrow > h1 {
+    font-size: 32px;
+}

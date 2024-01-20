@@ -1,0 +1,263 @@
+.dark {
+    --scrollbar: #48424e;
+    --background-primary: #27262c;
+    --background-secondary: #19191d;
+    --text: #ffffff;
+    --link: #1b60c7;
+}
+
+.light {
+    --scrollbar: #beb2c4;
+    --background-primary: #e7e2f1;
+    --background-secondary: #d8d2e3;
+    --text: #000000;
+    --link: #1b60c7;
+}
+
+@font-face {
+    font-family: Chivo;
+    src: url("../fonts/Chivo.ttf");
+}
+
+body {
+    background: var(--background-primary);
+    color: var(--text);
+    font-family: Chivo;
+}
+
+a {
+    color: var(--link);
+}
+
+p#latest {
+    font-size: 32px;
+}
+
+p#feedMissing {
+    color: var(--text);
+    opacity: 50%;
+    font-size: 24px;
+}
+
+.conbutton {
+    align-items: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 24px;
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0px 0px 8px #000000C0);
+    transition: scale ease-out 0.25s;
+}
+
+.conbutton:hover {
+    scale: 1.125;
+}
+
+#logo {
+    width: min(100%, 640px);
+}
+
+button {
+    transition: scale ease-out 0.25s;
+    border-radius: 8px;
+    border: solid 2px black;
+    background-color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+a.feedlink {
+    color: black;
+    text-decoration: none;
+    transition: scale ease-out 0.25s;
+    border-radius: 8px;
+    border: solid 2px black;
+    background-color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.feedlinks {
+    margin-bottom: 8px;
+}
+
+.feedimgs {
+    margin-bottom: 20px;
+}
+
+button:hover {
+    scale: 1.0625;
+    cursor: pointer;
+}
+
+div.feeditm {
+    background-color: var(--background-secondary);
+    margin: 32px;
+    max-width: 75%;
+    padding: 8px;
+    border-radius: 8px;
+    outline: solid 2px var(--text);
+}
+
+.feedtitle {
+    margin-bottom: 0px;
+}
+
+.feeddate {
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+.feedbody {
+    font-size: 16px;
+}
+
+#refreshfeed {
+    transition: scale ease-out 0.25s;
+}
+
+#refreshfeed:active {
+    scale: 0.9;
+}
+
+@media screen and (max-width: 616px) {
+    #openmenu {
+        display: initial !important;
+    }
+
+    .changetheme.mobile {
+        display: initial !important;
+    }
+
+    #topbar {
+        display: none !important;
+    }
+
+    #page-content {
+        top: 8px !important;
+    }
+}
+
+#page-content {
+    position: absolute;
+    top: 96px;
+    left: 0px;
+    right: 0px;
+}
+
+#openmenu {
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+}
+
+.changetheme {
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.changetheme.mobile {
+    position: fixed;
+    display: none;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+}
+
+.changetheme.desktop {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+}
+
+#topbar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: var(--background-secondary);
+    padding: 8px;
+    box-shadow: 0px 0px 8px black;
+    vertical-align: middle;
+}
+
+#topbar-logo {
+    height: 64px;
+    max-width: 100%;
+    margin-right: 24px;
+}
+
+.topbar-opt {
+    margin-left: 24px;
+    margin-right: 24px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 24px;
+}
+
+#sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 256px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: -264px;
+    background-color: var(--background-secondary); /* Pull from theme */
+    box-shadow: 0px 0px 8px black;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: left ease 0.3s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+#sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: var(--text);
+    display: block;
+    transition: 0.3s;
+}
+
+#sidenav .closemenu {
+    position: absolute;
+    cursor: pointer;
+    top: 16px;
+    right: 16px;
+}
+
+::-webkit-scrollbar {
+    width: 16px;
+    background-color: var(--background-secondary);
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 12px;
+    margin: 4px;
+    background-color: var(--scrollbar);
+    border-radius: 16px;
+}
+
+img {
+    max-width: 75%;
+}
+
+.light img.themed {
+    filter: brightness(0);
+}

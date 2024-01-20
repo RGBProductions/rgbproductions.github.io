@@ -1,0 +1,28 @@
+[
+    {
+        "hidden": true,
+        "published": "November 2, 2023",
+        "title": "Feed Item",
+        "body": "Description of the feed item",
+        "images": [
+            {
+                "url": "../shared/img/itch.png",
+                "alt": "Itch.io"
+            },
+            {
+                "url": "../shared/img/github.png",
+                "alt": "GitHub"
+            }
+        ],
+        "links": [
+            {
+                "label": "A link",
+                "url": "https://www.google.com"
+            },
+            {
+                "label": "Another link",
+                "url": "https://www.example.com"
+            }
+        ]
+    }
+]
