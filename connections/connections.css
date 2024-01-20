@@ -1,0 +1,41 @@
+.connection {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 80%;
+    height: 48px;
+    max-width: 512px;
+    background-color: var(--background-secondary);
+    outline: 2px var(--text) solid;
+    padding: 8px;
+    margin-bottom: 16px;
+    transition: outline-color ease 0.125s, scale ease-out 0.125s;
+}
+
+.connection img {
+    margin-right: 8px;
+    border-radius: 100%;
+    height: 100%;
+    width: auto;
+    outline-color: var(--link);
+    outline-style: solid;
+    outline-width: 0px;
+}
+
+.connection p {
+    justify-self: center;
+    align-self: center;
+    color: var(--text);
+    font-size: 32px;
+    transition: color ease 0.125s;
+}
+
+.connection:hover {
+    outline-color: var(--link);
+    scale: 1.025;
+}
+
+.connection:hover p {
+    color: var(--link);
+}

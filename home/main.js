@@ -31,7 +31,7 @@ async function refreshFeed() {
     for (let itm of feed) {
         if (!itm.hidden) {
             hasItems = true;
-            let elem = document.createElement("div");
+            let elem = document.createElement("section");
             elem.classList.add("feeditm");
 
             let title = document.createElement("h1");
