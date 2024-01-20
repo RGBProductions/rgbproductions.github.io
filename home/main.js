@@ -49,7 +49,7 @@ async function refreshFeed() {
             body.innerHTML = itm.body;
             elem.appendChild(body);
 
-            let images = document.createElement("div");
+            let images = document.createElement("section");
             images.classList.add("feedimgs");
             for (let image of (itm.images ?? [])) {
                 let img = document.createElement("img");
@@ -62,7 +62,7 @@ async function refreshFeed() {
             }
             elem.appendChild(images);
 
-            let links = document.createElement("div");
+            let links = document.createElement("section");
             links.classList.add("feedlinks");
             for (let link of (itm.links ?? [])) {
                 let button = document.createElement("a");
