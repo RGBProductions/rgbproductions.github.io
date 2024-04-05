@@ -53,8 +53,14 @@
 }
 
 .feed-contents>img {
-    width: 100%;
+    width: 75%;
     /* width: calc(100vw - 256px - 32px); */
+}
+
+.image-caption {
+    opacity: 75%;
+    font-style: italic;
+    font-size: 14px;
 }
 
 .feed-close {

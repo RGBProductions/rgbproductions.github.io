@@ -3,9 +3,16 @@
         "hidden": true,
         "published": "April 5, 2024",
         "title": "Feed Post Example",
-        "body": "Long description, used within the post once you click on it.\nThis is also used as the short description if no summary field is provided.\nAs more text is added, the box will become scrollable to fit all the content.",
+        "contents": [
+            {"type": "text", "contents": "This post is intended to showcase how feed posts are formatted and how they will appear when opened on the front-end."},
+            {"type": "text", "contents": "The first few lines are generally used to introduce the post and to provide a brief description of what is contained."},
+            {"type": "image", "src": "/shared/img/logo.png", "alt": "RGB Productions Logo", "caption": "Sometimes, an image will appear between lines."},
+            {"type": "header", "contents": "What Else?"},
+            {"type": "text", "contents": "This format also supports headers to organize the content."},
+            {"type": "text", "contents": "More details will be provided later."}
+        ],
         "summary": "Short description",
-        "thumbnail": "../shared/img/itch.png",
+        "thumbnail": "/shared/img/logo.png",
         "images": [],
         "links": []
     }

@@ -54,10 +54,30 @@ function createFeedPopout(item) {
     let contents = document.createElement("div");
     contents.classList.add("feed-contents");
 
-    for (let line of item.body.split("\n")) {
-        let lineElem = document.createElement("p");
-        lineElem.innerText = line;
-        contents.appendChild(lineElem);
+    for (let obj of item.contents) {
+        let type = obj.type;
+        if (type == "text") {
+            let lineElem = document.createElement("p");
+            lineElem.innerText = obj.contents;
+            contents.appendChild(lineElem);
+        }
+        if (type == "header") {
+            let lineElem = document.createElement("h1");
+            lineElem.innerText = obj.contents;
+            contents.appendChild(lineElem);
+        }
+        if (type == "image") {
+            let imgElem = document.createElement("img");
+            imgElem.src = obj.src;
+            imgElem.setAttribute("alt", obj.alt);
+            contents.appendChild(imgElem);
+            if (obj.caption) {
+                let captionElem = document.createElement("p");
+                captionElem.innerText = obj.caption;
+                captionElem.classList.add("image-caption");
+                contents.appendChild(captionElem);
+            }
+        }
     }
     
     box.appendChild(contents);
@@ -80,9 +100,63 @@ async function getFeed() {
     })
 }
 
+let allFeedItems = [];
+
+function pushFeed(items) {
+    items = items ?? allFeedItems;
+    let feedArea = document.getElementById("feed");
+    while (feedArea.firstChild) {
+        feedArea.removeChild(feedArea.firstChild);
+    }
+
+    for (let itm of items) {
+        let elem = document.createElement("section");
+        elem.classList.add("feed-opener");
+
+        if (itm.thumbnail) {
+            let thumbnail = document.createElement("img");
+            thumbnail.classList.add("feed-opener-thumbnail");
+            thumbnail.src = itm.thumbnail;
+            elem.appendChild(thumbnail);
+        }
+
+        let detailsArea = document.createElement("div");
+        detailsArea.classList.add("feed-opener-details");
+
+        let title = document.createElement("h1");
+        title.classList.add("feed-opener-title");
+        title.innerHTML = itm.title;
+        detailsArea.appendChild(title);
+
+        let date = document.createElement("p");
+        date.classList.add("feed-opener-date");
+        date.innerHTML = itm.published;
+        detailsArea.appendChild(date);
+
+        let summary = document.createElement("p");
+        summary.classList.add("feed-opener-summary");
+        let summaryText = itm.summary;
+        if (!summaryText) {
+            summaryText = body;
+        }
+        summary.innerHTML = summaryText;
+        detailsArea.appendChild(summary);
+
+        elem.appendChild(detailsArea);
+
+        elem.onclick = function() {
+            createFeedPopout(itm);
+        }
+
+        feedArea.appendChild(elem);
+    }
+
+    let feedMissing = document.getElementById("feedMissing");
+    feedMissing.style.display = items.length == 0 ? "initial" : "none";
+}
+
 async function refreshFeed() {
     refreshing = true;
-    let feedMissing = document.getElementById("feedMissing");
     let feedArea = document.getElementById("feed");
     while (feedArea.firstChild) {
         feedArea.removeChild(feedArea.firstChild);
@@ -100,82 +174,23 @@ async function refreshFeed() {
     for (let itm of feed) {
         if (!itm.hidden) {
             hasItems = true;
-            let elem = document.createElement("section");
-            elem.classList.add("feed-opener");
-
-            if (itm.thumbnail) {
-                let thumbnail = document.createElement("img");
-                thumbnail.classList.add("feed-opener-thumbnail");
-                thumbnail.src = itm.thumbnail;
-                elem.appendChild(thumbnail);
+            let body = "";
+            for (let obj of itm.contents) {
+                if (obj.type == "text") {
+                    body += obj.contents + " ";
+                }
+                if (obj.type == "header") {
+                    body += obj.contents + " ";
+                }
+                if (obj.type == "image") {
+                    body += (obj.caption ?? obj.alt ?? "") + " ";
+                }
             }
-
-            let detailsArea = document.createElement("div");
-            detailsArea.classList.add("feed-opener-details");
-
-            let title = document.createElement("h1");
-            title.classList.add("feed-opener-title");
-            title.innerHTML = itm.title;
-            detailsArea.appendChild(title);
-
-            let date = document.createElement("p");
-            date.classList.add("feed-opener-date");
-            date.innerHTML = itm.published;
-            detailsArea.appendChild(date);
-
-            let summary = document.createElement("p");
-            summary.classList.add("feed-opener-summary");
-            let summaryText = itm.summary;
-            if (!summaryText) {
-                summaryText = itm.body;
-            }
-            summary.innerHTML = summaryText;
-            detailsArea.appendChild(summary);
-
-            elem.appendChild(detailsArea);
-
-            // let body = document.createElement("p");
-            // body.classList.add("feedbody");
-            // body.innerHTML = itm.body;
-            // elem.appendChild(body);
-
-            // let images = document.createElement("section");
-            // images.classList.add("feedimgs");
-            // for (let image of (itm.images ?? [])) {
-            //     let img = document.createElement("img");
-            //     img.classList.add("feedlink");
-            //     img.src = image.url;
-            //     img.alt = image.alt;
-            //     img.title = image.alt;
-            //     images.appendChild(img);
-            //     images.appendChild(document.createElement("br"));
-            // }
-            // elem.appendChild(images);
-
-            // let links = document.createElement("section");
-            // links.classList.add("feedlinks");
-            // for (let link of (itm.links ?? [])) {
-            //     let button = document.createElement("a");
-            //     button.classList.add("feedlink");
-            //     button.target = "_blank";
-            //     button.href = link.url;
-            //     button.innerHTML = link.label;
-            //     links.appendChild(button);
-            // }
-            // elem.appendChild(links);
-
-            elem.onclick = function() {
-                createFeedPopout(itm);
-            }
-
-            feedArea.appendChild(elem);
+            itm.body = body;
+            allFeedItems.push(itm);
         }
     }
-    if (!hasItems) {
-        feedMissing.style.display = "initial";
-    } else {
-        feedMissing.style.display = "none";
-    }
+    pushFeed();
     refreshing = false;
 }
 
@@ -187,6 +202,28 @@ document.addEventListener("keydown", (e) => {
         }
     }
 })
+
+window.addEventListener("resize", (e) => {
+    console.log("resized")
+    let container = document.getElementsByClassName("popout-container")[0];
+    if (container) {
+        container.style.height = `${window.innerHeight}px`;
+    }
+})
+
+function searchFeed(query) {
+    if (query.length == 0) {
+        pushFeed(allFeedItems);
+        return;
+    }
+    let fuse = new Fuse(allFeedItems, {keys: ["title", "summary", "body"]});
+    let results = fuse.search(query);
+    let feedItems = [];
+    for (let itm of results) {
+        feedItems.push(itm.item);
+    }
+    pushFeed(feedItems);
+}
 
 setTimeout(() => {
     refreshFeed();

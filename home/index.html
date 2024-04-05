@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/shared/style/newfeed.css">
     <link rel="stylesheet" href="./home.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script> <!-- fuzzy search -->
+
     <meta content="RGB Productions" property="og:title" />
     <meta content="RGB Productions main website" property="og:description" />
     <meta content="/shared/img/icon.png" property="og:image" />
@@ -28,6 +30,7 @@
         <!-- https://dcbadge.vercel.app/api/server/MPeY5FPtHB -->
         <br>
         <p id="latest">Latest <img src="/shared/img/refresh.png" title="Refresh Feed" alt="Refresh Feed" id="refreshfeed" class="themed" width="24px" height="24px" style="margin-left: 8px; vertical-align: middle; cursor: pointer;" onclick="refreshFeed();"></p>
+        <form id="search-feed" oninput="try { searchFeed(document.getElementById('search-feed-query').value); } catch(e) {console.error(e)} return false "><input id="search-feed-query" placeholder="Search feed..." style="width:256px"></form>
         <p id="feedMissing" style="visibility: visible;">Feels empty in here...</p>
         <div id="feed"></div>
     </center>
