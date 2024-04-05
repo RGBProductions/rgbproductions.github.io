@@ -14,10 +14,9 @@ p#feedMissing, p#feedLoading {
     width: 48px;
     height: 48px;
     filter: drop-shadow(0px 0px 8px #000000C0);
-    transition: scale ease-out 0.25s;
 }
 
-.conbutton:hover {
+.link-container:hover {
     scale: 1.125;
 }
 
@@ -31,6 +30,7 @@ p#feedMissing, p#feedLoading {
 }
 
 .link-container {
+    transition: scale ease-out 0.25s;
     display: flex;
     flex-direction: column;
     align-items: center;
