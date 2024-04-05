@@ -6,6 +6,16 @@
     <title>RGB Productions - Home</title>
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
     <link rel="icon" href="/shared/img/icon.png">
     <link rel="stylesheet" href="/shared/style/main.css">
     <link rel="stylesheet" href="/shared/style/newfeed.css">
@@ -22,16 +32,19 @@
 <body>
     <center id="page-content">
         <img src="/shared/img/logo.png" alt="RGB Productions Logo" id="logo"><br>
-        <a target="_blank" href="https://rgbproductions.itch.io" title="RGB on Itch.io"><img src="/shared/img/itch.png" alt="Itch.io Link" id="itch" class="conbutton"></a>
-        <a target="_blank" href="https://github.com/RGBProductions" title="RGB on GitHub"><img src="/shared/img/github.png" alt="Github Link" id="github" class="conbutton"></a>
-        <a target="_blank" href="https://discord.gg/MPeY5FPtHB" title="RGB on Discord"><img src="/shared/img/discord.png" alt="Discord Link" id="discord" class="conbutton"></a>
-        <a target="_blank" href="https://bsky.app/profile/rgbproductions.bsky.social" title="RGB on Bluesky"><img src="/shared/img/bluesky.png" alt="Bluesky Link" id="bluesky" class="conbutton"></a>
-        <a target="_blank" href="https://wetdry.world/@RGBProductions" title="RGB on Mastodon"><img src="/shared/img/mastodon.png" alt="Mastodon Link" id="mastodon" class="conbutton"></a>
+        <div id="links">
+            <a target="_blank" href="https://rgbproductions.itch.io" title="RGB on Itch.io" class="link-container"><img src="/shared/img/itch.png" alt="Itch.io Link" id="itch" class="conbutton"></a>
+            <a target="_blank" href="https://github.com/RGBProductions" title="RGB on GitHub" class="link-container"><img src="/shared/img/github.png" alt="Github Link" id="github" class="conbutton"></a>
+            <a target="_blank" href="https://discord.gg/MPeY5FPtHB" title="RGB on Discord" class="link-container"><img src="/shared/img/discord.png" alt="Discord Link" id="discord" class="conbutton"><p id="online-count"></p></a>
+            <a target="_blank" href="https://bsky.app/profile/rgbproductions.bsky.social" title="RGB on Bluesky" class="link-container"><img src="/shared/img/bluesky.png" alt="Bluesky Link" id="bluesky" class="conbutton"></a>
+            <a target="_blank" href="https://wetdry.world/@RGBProductions" title="RGB on Mastodon" class="link-container"><img src="/shared/img/mastodon.png" alt="Mastodon Link" id="mastodon" class="conbutton"></a>
+        </div>
         <!-- https://dcbadge.vercel.app/api/server/MPeY5FPtHB -->
         <br>
         <p id="latest">Latest <img src="/shared/img/refresh.png" title="Refresh Feed" alt="Refresh Feed" id="refreshfeed" class="themed" width="24px" height="24px" style="margin-left: 8px; vertical-align: middle; cursor: pointer;" onclick="refreshFeed();"></p>
-        <form id="search-feed" oninput="try { searchFeed(document.getElementById('search-feed-query').value); } catch(e) {console.error(e)} return false "><input id="search-feed-query" placeholder="Search feed..." style="width:256px"></form>
-        <p id="feedMissing" style="visibility: visible;">Feels empty in here...</p>
+        <form id="search-feed" oninput="try { searchFeed(document.getElementById('search-feed-query').value); } catch(e) {console.error(e)} return false "><input id="search-feed-query" placeholder="Search feed..."></form>
+        <p id="feedMissing" style="display: none;">Feels empty in here...</p>
+        <p id="feedLoading" style="display: none;">Refreshing...</p>
         <div id="feed"></div>
     </center>
 

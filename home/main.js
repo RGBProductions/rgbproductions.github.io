@@ -156,6 +156,10 @@ function pushFeed(items) {
 }
 
 async function refreshFeed() {
+    let feedLoading = document.getElementById("feedLoading");
+    let feedMissing = document.getElementById("feedMissing");
+    feedLoading.style.display = "initial";
+    feedMissing.style.display = "none";
     refreshing = true;
     let feedArea = document.getElementById("feed");
     while (feedArea.firstChild) {
@@ -192,6 +196,7 @@ async function refreshFeed() {
     }
     pushFeed();
     refreshing = false;
+    feedLoading.style.display = "none";
 }
 
 document.addEventListener("keydown", (e) => {
@@ -204,7 +209,6 @@ document.addEventListener("keydown", (e) => {
 })
 
 window.addEventListener("resize", (e) => {
-    console.log("resized")
     let container = document.getElementsByClassName("popout-container")[0];
     if (container) {
         container.style.height = `${window.innerHeight}px`;
@@ -228,3 +232,9 @@ function searchFeed(query) {
 setTimeout(() => {
     refreshFeed();
 }, 200);
+
+fetch("https://discord.com/api/guilds/965485027410468868/widget.json").then((res) => {
+    res.json().then(obj => {
+        document.getElementById("online-count").innerText = `${obj.presence_count} online`;
+    }).catch(console.error)
+}).catch(console.error)
