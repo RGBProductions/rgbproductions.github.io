@@ -1,28 +1,12 @@
 [
     {
         "hidden": true,
-        "published": "November 2, 2023",
-        "title": "Feed Item",
-        "body": "Description of the feed item",
-        "images": [
-            {
-                "url": "../shared/img/itch.png",
-                "alt": "Itch.io"
-            },
-            {
-                "url": "../shared/img/github.png",
-                "alt": "GitHub"
-            }
-        ],
-        "links": [
-            {
-                "label": "A link",
-                "url": "https://www.google.com"
-            },
-            {
-                "label": "Another link",
-                "url": "https://www.example.com"
-            }
-        ]
+        "published": "April 5, 2024",
+        "title": "Feed Post Example",
+        "body": "Long description, used within the post once you click on it.\nThis is also used as the short description if no summary field is provided.\nAs more text is added, the box will become scrollable to fit all the content.",
+        "summary": "Short description",
+        "thumbnail": "../shared/img/itch.png",
+        "images": [],
+        "links": []
     }
 ]

@@ -42,35 +42,53 @@ a.feedlink {
     padding-right: 12px;
 }
 
-.feedlinks {
-    margin-bottom: 8px;
-}
-
-.feedimgs {
-    margin-bottom: 20px;
-}
-
-.feeditm {
+.feed-opener {
+    text-align: left;
     background-color: var(--background-secondary);
     margin: 32px;
     max-width: 75%;
-    padding: 8px;
+    padding: 16px;
     border-radius: 8px;
     outline: solid 2px var(--text);
+    cursor: pointer;
+    display: flex;
+    height: 96px;
+    flex-direction: row;
+    align-items: center;
 }
 
-.feedtitle {
+.feed-opener-details {
+    display: flex;
+    overflow: hidden;
+    height: fit-content;
+    flex-direction: column;
+}
+
+.feed-opener-title {
     font-size: 32px;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 
-.feeddate {
-    margin-top: 2px;
+.feed-opener-thumbnail {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.feed-opener-date {
+    margin-top: 4px;
     font-size: 12px;
+    margin-bottom: 8px;
 }
 
-.feedbody {
-    font-size: 16px;
+.feed-opener-summary {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 4px;
+    margin-bottom: 0px;
 }
 
 #refreshfeed {

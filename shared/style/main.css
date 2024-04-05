@@ -2,6 +2,7 @@
     --scrollbar: #48424e;
     --background-primary: #27262c;
     --background-secondary: #19191d;
+    --background-popout: #000000;
     --text: #ffffff;
     --link: #1EBCF1;
 }
@@ -10,6 +11,7 @@
     --scrollbar: #beb2c4;
     --background-primary: #e7e2f1;
     --background-secondary: #d8d2e3;
+    --background-popout: #ffffff;
     --text: #000000;
     --link: #1448C2;
 }
@@ -161,7 +163,7 @@ button:hover:enabled {
     border-radius: 16px;
 }
 
-img {
+img#logo {
     max-width: 75%;
 }
 

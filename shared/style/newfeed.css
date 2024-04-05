@@ -1,0 +1,86 @@
+.popout-container {
+    transition: opacity ease 0.25s;
+    width: 100vw;
+    height: 90vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    backdrop-filter: blur(8px) brightness(0.5);
+    justify-content: center;
+    --popout-margin: 128px;
+    --popout-rounding: 8px;
+}
+
+.feed-box {
+    display: block;
+    text-align: center;
+    position: relative;
+    width: 100vw;
+    min-height: calc(100vh - calc(var(--popout-margin) * 2));
+    margin: var(--popout-margin);
+    outline: 4px var(--text) solid;
+    overflow-y: scroll;
+    border-radius: var(--popout-rounding);
+    background: var(--background-popout);
+}
+
+.feed-header {
+    position: sticky;
+    top: 0px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: fit-content;
+    outline: 4px var(--text) solid;
+    backdrop-filter: blur(8px);
+}
+
+.feed-title {
+    margin: 0px;
+    width: calc(100% - 128px);
+}
+
+.feed-date {
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+.feed-contents {
+    margin: 16px;
+}
+
+.feed-contents>img {
+    width: 100%;
+    /* width: calc(100vw - 256px - 32px); */
+}
+
+.feed-close {
+    position: absolute;
+    cursor: pointer;
+    align-self: center;
+    right: 32px;
+}
+
+@media screen and (max-width: 616px) {
+    .popout-container {
+        --popout-margin: 0px;
+        --popout-rounding: 0px;
+    }
+
+    .feed-box {
+        display: block;
+        text-align: center;
+        position: relative;
+        width: 100vw;
+        min-height: initial !important;
+        height: 100% !important;
+        margin: 0px !important;
+        outline: none !important;
+        overflow-y: scroll;
+        border-radius: 0px !important;
+        background: var(--background-popout);
+    }
+}
