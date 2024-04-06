@@ -58,7 +58,7 @@
 }
 
 .image-caption {
-    opacity: 75%;
+    color: var(--faint);
     font-style: italic;
     font-size: 14px;
 }

@@ -4,6 +4,7 @@
     --background-secondary: #19191d;
     --background-popout: #000000;
     --text: #ffffff;
+    --faint: #808080;
     --link: #1EBCF1;
 }
 
@@ -13,6 +14,7 @@
     --background-secondary: #d8d2e3;
     --background-popout: #ffffff;
     --text: #000000;
+    --faint: #808080;
     --link: #1448C2;
 }
 

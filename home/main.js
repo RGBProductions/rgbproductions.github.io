@@ -161,6 +161,7 @@ async function refreshFeed() {
     feedLoading.style.display = "initial";
     feedMissing.style.display = "none";
     refreshing = true;
+    allFeedItems = [];
     let feedArea = document.getElementById("feed");
     while (feedArea.firstChild) {
         feedArea.removeChild(feedArea.firstChild);
@@ -215,6 +216,10 @@ window.addEventListener("resize", (e) => {
     }
 })
 
+function sortedFeed(feed, method) {
+
+}
+
 function searchFeed(query) {
     if (query.length == 0) {
         pushFeed(allFeedItems);
@@ -222,11 +227,7 @@ function searchFeed(query) {
     }
     let fuse = new Fuse(allFeedItems, {keys: ["title", "summary", "body"]});
     let results = fuse.search(query);
-    let feedItems = [];
-    for (let itm of results) {
-        feedItems.push(itm.item);
-    }
-    pushFeed(feedItems);
+    pushFeed(results.map(v => v.item));
 }
 
 setTimeout(() => {
