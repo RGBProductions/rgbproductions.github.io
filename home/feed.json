@@ -1,10 +1,10 @@
 [
     {
-        "hidden": true,
+        "hidden": false,
         "published": "April 5, 2024",
         "title": "Feed Post Example",
         "contents": [
-            {"type": "text", "contents": "This post is intended to showcase how feed posts are formatted and how they will appear when opened on the front-end."},
+            {"type": "text", "contents": "This post is intended to test how feed posts are formatted and how they will appear when opened on the front-end."},
             {"type": "text", "contents": "The first few lines are generally used to introduce the post and to provide a brief description of what is contained."},
             {"type": "image", "src": "/shared/img/logo.png", "alt": "RGB Productions Logo", "caption": "Sometimes, an image will appear between lines."},
             {"type": "header", "contents": "What Else?"},
