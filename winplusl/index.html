@@ -37,6 +37,7 @@
           numTimes = "0";
         }
         numTimes = parseInt(numTimes) + 1;
+        localStorage.setItem("winplusl_howmany", numTimes);
         if (numTimes < 0) {
           let elem = document.createElement("p");
           elem.innerText = `i do believe you have edited your localstorage. why??`;
