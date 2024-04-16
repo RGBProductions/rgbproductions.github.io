@@ -8,6 +8,7 @@
         height: 100vh;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
       }
 
       body {
@@ -29,5 +30,24 @@
     <div id="view">
       <h1>you forgot lock your computer</h1>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let numTimes = localStorage.getItem("winplusl_howmany");
+        if (!numTimes) {
+          numTimes = "0";
+        }
+        numTimes = parseInt(numTimes) + 1;
+        if (numTimes < 0) {
+          let elem = document.createElement("p");
+          elem.innerText = `i do believe you have edited your localstorage. why??`;
+          document.getElementById("view").appendChild(elem);
+        }
+        if (numTimes > 1) {
+          let elem = document.createElement("p");
+          elem.innerText = `you have done this ${numTimes} times.`;
+          document.getElementById("view").appendChild(elem);
+        }
+      })
+    </script>
   </body>
 </html>
