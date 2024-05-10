@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Portfolio</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <div id="lights" style="transition: transform 3s ease-out;">
+        <div class="light" style="width: 768px; height: 768px; background-color: red; transform: translate(-512px, -128px); animation-delay: 0s;"></div>
+        <div class="light" style="width: 768px; height: 768px; background-color: lime; transform: translate(512px, 384px); animation-delay: 0.25s;"></div>
+        <div class="light" style="width: 768px; height: 768px; background-color: blue; transform: translate(-384px, 896px); animation-delay: 0.5s;"></div>
+    </div>
+
+    <main>
+        <div class="center-vertical">
+            <h1 id="name">Andrew Freeman</h1>
+    
+            <div class="what-i-am">
+                <p>Game Developer</p>
+                <p>Programmer</p>
+                <p>UX Designer</p>
+            </div>
+
+            <div class="home-links-wrapper">
+                <div class="home-links">
+                    <a href="https://www.linkedin.com/in/andrew-freeman-855bb92b4/" target="_blank" class="page-button">LinkedIn<div class="underline"></div></a>
+                    <a href="./Resume.pdf" target="_blank" class="page-button">Resume<div class="underline"></div></a>
+                </div>
+            </div>
+
+            <p class="contact">Send an Email: <a href="mailto:luvm1n3craft@gmail.com">luvm1n3craft@gmail.com</a></p>
+            <p class="contact">Send a Text Message: (559) 207-0863</p>
+        </div>
+    </main>
+
+    <div class="contain-center">
+        <div id="pages-bar">
+            <a class="page-button" tabindex="1" href="./home">Home<div class="underline"></div></a>
+            <a class="page-button" tabindex="2" href="./about">About Me<div class="underline"></div></a>
+            <a class="page-button" tabindex="3" href="./projects">Projects<div class="underline"></div></a>
+        </div>
+    </div>
+
+    <button id="menu-opener" onclick="openMenu()"></button>
+    <div id="menu">
+        <button id="menu-closer" onclick="closeMenu()"></button>
+        <div id="menu-buttons">
+            <a class="page-button" href="./home">Home<div class="underline"></div></a>
+            <a class="page-button" href="./about">About Me<div class="underline"></div></a>
+            <a class="page-button" href="./projects">Projects<div class="underline"></div></a>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

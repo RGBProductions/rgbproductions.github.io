@@ -1,0 +1,213 @@
+@font-face {
+    font-family: 'Freeman';
+    src: url("Freeman-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Chivo';
+    src: url("Chivo.ttf");
+}
+
+body {
+    background-color: #000000;
+    color: white;
+    font-family: 'Chivo';
+    margin-left: 64px;
+    margin-right: 64px;
+}
+
+a {
+    color: #0084ff;
+}
+
+main {
+    margin-top: 128px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+}
+
+h2 {
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    white-space: break-spaces;
+}
+
+#lights {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: -256;
+}
+
+.light {
+    display: block;
+    position: absolute;
+    filter: blur(384px);
+    border-radius: 100%;
+    opacity: 75%;
+}
+
+quote {
+    display: block;
+    font-size: 32px;
+    text-align: center;
+}
+
+quote::before {
+    content: '“';
+}
+
+quote::after {
+    content: '”';
+}
+
+.contain-center {
+    display: flex;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#pages-bar {
+    display: flex;
+    position: absolute;
+    width: fit-content;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    top: 32px;
+    border-bottom: 1px solid #FFFFFF80;
+    border-top: 1px solid #FFFFFF80;
+}
+
+.page-button {
+    width: 128px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin-left: 32px;
+    margin-right: 32px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    color: white;
+
+    transition: color 0.25s ease-out, filter 0.25s ease-out;
+}
+
+.underline {
+    display: block;
+    position: absolute;
+    top: 36px;
+    background-color: white;
+    width: 0px;
+    height: 4px;
+
+    transition: width 0.25s ease-out;
+}
+
+.page-button:hover, .page-button:focus {
+    color: #0084ff;
+    filter: drop-shadow(0px 0px 8px #0084ff);
+}
+
+.page-button:hover>.underline, .page-button:focus>.underline {
+    width: 100%;
+}
+
+.page-button:focus {
+    outline: none;
+}
+
+#menu-opener {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    background-image: url("./img/menu.png");
+    background-size: cover;
+    cursor: pointer;
+
+    display: none;
+}
+
+#menu-closer {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    background: none;
+    border: none;
+    background-image: url("./img/close.png");
+    background-size: cover;
+    cursor: pointer;
+}
+
+#menu {
+    position: fixed;
+    top: 0px;
+    left: -256px;
+    width: 256px;
+    height: 100vh;
+    background-color: black;
+    border-radius: 0px 8px 8px 0px;
+    transition: left 0.5s ease;
+
+    display: none;
+}
+
+#menu-buttons {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+@media screen and (max-width: 512px) {
+    #pages-bar {
+        display: none;
+    }
+
+    #menu-buttons>.page-button {
+        border-top: 1px solid white;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        width: calc(100% - 32px);
+    }
+
+    #menu-buttons>.page-button:last-child {
+        border-bottom: 1px solid white;
+    }
+
+    #menu {
+        display: initial;
+    }
+
+    #menu-opener {
+        display: initial;
+    }
+}
