@@ -80,9 +80,9 @@ body {
 
 @media screen and (max-width: 512px) {
     .what-i-am {
-        margin-top: 32px;
+        margin-top: 24px;
         flex-direction: column;
-        margin-bottom: 32px;
+        margin-bottom: 24px;
     }
 
     .what-i-am>p {
