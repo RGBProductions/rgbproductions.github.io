@@ -75,10 +75,14 @@ body {
 
 #contact-header {
     margin-top: 0px;
-    font-size: 40px;
+    font-size: 36px;
 }
 
 @media screen and (max-width: 512px) {
+    #name {
+        font-size: 40px;
+    }
+
     .what-i-am {
         margin-top: 24px;
         flex-direction: column;
