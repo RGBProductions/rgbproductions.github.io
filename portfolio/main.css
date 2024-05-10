@@ -211,3 +211,8 @@ quote::after {
         display: initial;
     }
 }
+
+.shareable {
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -73,11 +73,16 @@ body {
     font-size: 24px;
 }
 
+#contact-header {
+    margin-top: 0px;
+    font-size: 40px;
+}
+
 @media screen and (max-width: 512px) {
     .what-i-am {
-        margin-top: 48px;
+        margin-top: 32px;
         flex-direction: column;
-        margin-bottom: 48px;
+        margin-bottom: 32px;
     }
 
     .what-i-am>p {
@@ -87,6 +92,7 @@ body {
         border-top: 1px solid white;
         margin-bottom: 0px;
         margin-top: 0px;
+        font-size: 24px;
     }
 
     .what-i-am>p:last-child {
