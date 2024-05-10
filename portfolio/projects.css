@@ -140,9 +140,9 @@ body {
 }
 
 .project-close {
-    position: absolute;
-    left: 16px;
-    top: 16px;
+    position: fixed;
+    left: 80px;
+    top: 80px;
     display: block;
     border: none;
     background: none;
@@ -254,6 +254,11 @@ body {
     .project {
         width: 100%;
         height: 296px;
+    }
+
+    .project-close {
+        left: 16px;
+        top: 16px;
     }
 
     .project-header {
