@@ -79,8 +79,21 @@ function createFeedPopout(item) {
             }
         }
     }
-    
+
+    let links = document.createElement("div");
+    links.id = "links";
+
+    for (let obj of item.links) {
+        let link = document.createElement("a");
+        link.classList.add("link-container");
+        link.classList.add("feedlink");
+        link.innerText = obj.label;
+        link.href = obj.href;
+        links.appendChild(link);
+    }
+
     box.appendChild(contents);
+    box.appendChild(links);
 
     container.appendChild(box);
     

@@ -1,19 +1,36 @@
 [
     {
         "hidden": false,
-        "published": "April 5, 2024",
-        "title": "Feed Post Example",
+        "published": "July 17, 2024",
+        "title": "The Slash of the Dice 1.2",
         "contents": [
-            {"type": "text", "contents": "This post is intended to test how feed posts are formatted and how they will appear when opened on the front-end."},
-            {"type": "text", "contents": "The first few lines are generally used to introduce the post and to provide a brief description of what is contained."},
-            {"type": "image", "src": "/shared/img/logo.png", "alt": "RGB Productions Logo", "caption": "Sometimes, an image will appear between lines."},
-            {"type": "header", "contents": "What Else?"},
-            {"type": "text", "contents": "This format also supports headers to organize the content."},
-            {"type": "text", "contents": "More details will be provided later."}
+            {"type": "text", "contents": "It's been two years since The Slash of the Dice was first submitted to the GMTK Game Jam 2022 following the theme \"Roll of the Dice\". Since then, I've been working on overhauling and improving a majority of the game's features to make it even better than its game jam counterpart. Today, I finally release this version that's been in the works for almost two years."},
+            {"type": "header", "contents": "Complete Menu Overhaul"},
+            {"type": "text", "contents": "The original menu was essentially just a list. That's boring and difficult to navigate. Combined with certain features being impossible on that system, I decided to rework the entire menu."},
+            {"type": "text", "contents": "With a design made by TotallyNotFrisk, this menu aims to improve the overall user experience and make the game more visually appealing."},
+            {"type": "image", "src": "/home/img/slash12/menu_overhaul.png", "alt": "New menu sample", "caption": "The new menu is a significant improvement over the old design"},
+            {"type": "header", "contents": "Player Customization"},
+            {"type": "text", "contents": "Another big feature of 1.2 is the new player customization options. You can now change the player's color, trail, death effect, and hat."},
+            {"type": "text", "contents": "I'd like to thank MichaelEpicA for implementing most of the customization features."},
+            {"type": "image", "src": "/home/img/slash12/ss4.png", "alt": "Customization menu", "caption": "Various customization options!"},
+            {"type": "header", "contents": "Achievements"},
+            {"type": "text", "contents": "Why not have more reasons to play the game? There are now many achievements for you to unlock, some being extremely simple and others requiring some significant dedication."},
+            {"type": "image", "src": "/home/img/slash12/achievements.png", "alt": "Achievements menu", "caption": "Some achievements are hidden..."},
+            {"type": "header", "contents": "Playtest Support"},
+            {"type": "text", "contents": "A big thanks to the 1.2 beta playtesters for helping spot and fix issues before release:"},
+            {"type": "text", "contents": "EastCoastBraiden"},
+            {"type": "text", "contents": "nicholas"},
+            {"type": "text", "contents": "MichaelEpicA"},
+            {"type": "header", "contents": "And thank you"},
+            {"type": "text", "contents": "for reading this, and I hope you have fun!"},
+            {"type": "text", "contents": "Here's to another two years!"}
         ],
-        "summary": "Short description",
-        "thumbnail": "/shared/img/logo.png",
+        "summary": "Two-year overhaul update!",
+        "thumbnail": "/home/img/slash12/thumbnail.png",
         "images": [],
-        "links": []
+        "links": [
+            {"label": "Itch.io", "href": "https://rgbproductions.itch.io/the-slash-of-the-dice"},
+            {"label": "GitHub", "href": "https://github.com/RGBProductions/TheSlashOfTheDice/releases/tag/v1.2"}
+        ]
     }
 ]
