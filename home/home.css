@@ -49,6 +49,12 @@ p#feedMissing, p#feedLoading {
     text-decoration: none;
 }
 
+#is-live {
+    margin: 0px;
+    color: var(--text);
+    text-decoration: none;
+}
+
 #logo {
     margin: 8px;
     margin-bottom: 32px;

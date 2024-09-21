@@ -252,3 +252,11 @@ fetch("https://discord.com/api/guilds/965485027410468868/widget.json").then((res
         document.getElementById("online-count").innerText = `${obj.presence_count} online`;
     }).catch(console.error)
 }).catch(console.error)
+
+fetch("https://decapi.me/twitch/uptime/rgbproductionsgames").then((res) => {
+    res.text().then(text => {
+        if (!text.includes("offline")) {
+            document.getElementById("is-live").innerText = `LIVE`;
+        }
+    }).catch(console.error)
+}).catch(console.error)
