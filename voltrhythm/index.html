@@ -2,8 +2,8 @@
 <html lang="en">
 <html>
     <head>
-        <title>RGB Productions - VoltRhythm</title>
-        <link rel="icon" href="/shared/img/icon.png">
+        <title>AWAITING REMOTE SIGNAL</title>
+        <link rel="icon" href="./icon.png">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo">
 
         <style>
@@ -38,7 +38,22 @@
 
     <body>
         <container>
-            <img src="./awaiting.png">
+            <img id="awaiting" src="./awaiting.png">
+            <img id="received" style="display: none;" src="./received.png">
         </container>
     </body>
+
+    <script>
+        let time = 1745661600000;
+        let delay = time-Date.now();
+
+        if (delay <= 0) {
+            document.getElementById("awaiting").style.display = "none";
+            document.getElementById("received").style.display = "initial";
+        }
+        
+        setTimeout(() => {
+            location.reload();
+        }, Math.max(5000, Math.min(20000000, delay)));
+    </script>
 </html>
