@@ -46,6 +46,7 @@ p#feedMissing, p#feedLoading {
 #online-count {
     margin: 0px;
     color: var(--text);
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -135,6 +136,15 @@ a.feedlink {
 @media screen and (max-width: 616px) {
     .feed-opener-title {
         font-size: 24px;
+    }
+
+    .link-container {
+        width: 40px;
+    }
+
+    .conbutton {
+        width: 40px;
+        height: 40px;
     }
 }
 
