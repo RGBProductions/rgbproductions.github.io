@@ -60,6 +60,7 @@
         }
         
         setTimeout(() => {
+            document.getElementById("awaiting").style.display = "none";
             document.getElementById("received").style.display = "initial";
             location.reload();
         }, Math.max(5000, Math.min(20000000, delay)));
