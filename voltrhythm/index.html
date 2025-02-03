@@ -38,7 +38,7 @@
 
     <body>
         <container>
-            <img id="awaiting" src="./awaiting.png">
+            <img id="awaiting" style="display: none;" src="./awaiting.png">
             <img id="received" style="display: none;" src="./received.png">
         </container>
     </body>
@@ -48,11 +48,13 @@
         let delay = time-Date.now();
 
         if (delay <= 0) {
-            document.getElementById("awaiting").style.display = "none";
             document.getElementById("received").style.display = "initial";
+        } else {
+            document.getElementById("awaiting").style.display = "initial";
         }
         
         setTimeout(() => {
+            document.getElementById("received").style.display = "initial";
             location.reload();
         }, Math.max(5000, Math.min(20000000, delay)));
     </script>
