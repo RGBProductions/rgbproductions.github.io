@@ -1,0 +1,360 @@
+/* VoltRhythm Palette */
+
+* {
+    --BLACK: #000;
+    --BLUE: #00A;
+    --GREEN: #0A0;
+    --CYAN: #0AA;
+    --RED: #A00;
+    --PURPLE: #A0A;
+    --GOLD: #AA0;
+    --LIGHT_GRAY: #AAA;
+    --DARK_GRAY: #555;
+    --LIGHT_BLUE: #55F;
+    --LIGHT_GREEN: #5F5;
+    --AQUA: #5FF;
+    --LIGHT_RED: #F55;
+    --MAGENTA: #F5F;
+    --YELLOW: #FF5;
+    --WHITE: #FFF;
+}
+
+.FG-BLACK {
+    color: var(--BLACK);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--BLACK), 0px 0px var(--BLOOM_BLUR) var(--BLACK);
+}
+.FG-BLUE {
+    color: var(--BLUE);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--BLUE), 0px 0px var(--BLOOM_BLUR) var(--BLUE);
+}
+.FG-GREEN {
+    color: var(--GREEN);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+}
+.FG-CYAN {
+    color: var(--CYAN);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--CYAN), 0px 0px var(--BLOOM_BLUR) var(--CYAN);
+}
+.FG-RED {
+    color: var(--RED);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+}
+.FG-PURPLE {
+    color: var(--PURPLE);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+}
+.FG-GOLD {
+    color: var(--GOLD);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+}
+.FG-LIGHT_GRAY {
+    color: var(--LIGHT_GRAY);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GRAY), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GRAY);
+}
+.FG-DARK_GRAY {
+    color: var(--DARK_GRAY);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY), 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY);
+}
+.FG-LIGHT_BLUE {
+    color: var(--LIGHT_BLUE);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+}
+.FG-LIGHT_GREEN {
+    color: var(--LIGHT_GREEN);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GREEN), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GREEN);
+}
+.FG-AQUA {
+    color: var(--AQUA);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--AQUA), 0px 0px var(--BLOOM_BLUR) var(--AQUA);
+}
+.FG-LIGHT_RED {
+    color: var(--LIGHT_RED);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_RED), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_RED);
+}
+.FG-MAGENTA {
+    color: var(--MAGENTA);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--MAGENTA), 0px 0px var(--BLOOM_BLUR) var(--MAGENTA);
+}
+.FG-YELLOW {
+    color: var(--YELLOW);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+}
+.FG-WHITE {
+    color: var(--WHITE);
+    text-shadow: 0px 0px var(--BLOOM_BLUR) var(--WHITE), 0px 0px var(--BLOOM_BLUR) var(--WHITE);
+}
+
+.BOX-BLACK {
+    border-color: var(--BLACK);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--BLACK), inset 0px 0px var(--BLOOM_BLUR) var(--BLACK);
+}
+.BOX-BLUE {
+    border-color: var(--BLUE);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--BLUE), inset 0px 0px var(--BLOOM_BLUR) var(--BLUE);
+}
+.BOX-GREEN {
+    border-color: var(--GREEN);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), inset 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+}
+.BOX-CYAN {
+    border-color: var(--CYAN);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--CYAN), inset 0px 0px var(--BLOOM_BLUR) var(--CYAN);
+}
+.BOX-RED {
+    border-color: var(--RED);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), inset 0px 0px var(--BLOOM_BLUR) var(--RED);
+}
+.BOX-PURPLE {
+    border-color: var(--PURPLE);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), inset 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+}
+.BOX-GOLD {
+    border-color: var(--GOLD);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), inset 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+}
+.BOX-LIGHT_GRAY {
+    border-color: var(--LIGHT_GRAY);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GRAY), inset 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GRAY);
+}
+.BOX-DARK_GRAY {
+    border-color: var(--DARK_GRAY);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY), inset 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY);
+}
+.BOX-LIGHT_BLUE {
+    border-color: var(--LIGHT_BLUE);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), inset 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+}
+.BOX-LIGHT_GREEN {
+    border-color: var(--LIGHT_GREEN);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GREEN), inset 0px 0px var(--BLOOM_BLUR) var(--LIGHT_GREEN);
+}
+.BOX-AQUA {
+    border-color: var(--AQUA);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--AQUA), inset 0px 0px var(--BLOOM_BLUR) var(--AQUA);
+}
+.BOX-LIGHT_RED {
+    border-color: var(--LIGHT_RED);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_RED), inset 0px 0px var(--BLOOM_BLUR) var(--LIGHT_RED);
+}
+.BOX-MAGENTA {
+    border-color: var(--MAGENTA);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--MAGENTA), inset 0px 0px var(--BLOOM_BLUR) var(--MAGENTA);
+}
+.BOX-YELLOW {
+    border-color: var(--YELLOW);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), inset 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+}
+.BOX-WHITE {
+    border-color: var(--WHITE);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--WHITE), inset 0px 0px var(--BLOOM_BLUR) var(--WHITE);
+}
+
+.FG-OVERVOLT span:nth-child(6n) {
+    animation: overvolt1 1s infinite step-start reverse;
+}
+
+.FG-OVERVOLT span:nth-child(6n+1) {
+    animation: overvolt2 1s infinite step-start reverse;
+}
+
+.FG-OVERVOLT span:nth-child(6n+2) {
+    animation: overvolt3 1s infinite step-start reverse;
+}
+
+.FG-OVERVOLT span:nth-child(6n+3) {
+    animation: overvolt4 1s infinite step-start reverse;
+}
+
+.FG-OVERVOLT span:nth-child(6n+4) {
+    animation: overvolt5 1s infinite step-start reverse;
+}
+
+.FG-OVERVOLT span:nth-child(6n+5) {
+    animation: overvolt6 1s infinite step-start reverse;
+}
+
+@keyframes overvolt1 {
+    0% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    16.667% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    33.333% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    50% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    66.667% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    83.333% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    100% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+}
+
+@keyframes overvolt2 {
+    0% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    16.667% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    33.333% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    50% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    66.667% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    83.333% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    100% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+}
+
+@keyframes overvolt3 {
+    0% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    16.667% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    33.333% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    50% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    66.667% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    83.333% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    100% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+}
+
+@keyframes overvolt4 {
+    0% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    16.667% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    33.333% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    50% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    66.667% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    83.333% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    100% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+}
+
+@keyframes overvolt5 {
+    0% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    16.667% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    33.333% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    50% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    66.667% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    83.333% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    100% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+}
+
+@keyframes overvolt6 {
+    0% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+    16.667% {
+        color: var(--RED);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--RED), 0px 0px var(--BLOOM_BLUR) var(--RED);
+    }
+    33.333% {
+        color: var(--GOLD);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GOLD), 0px 0px var(--BLOOM_BLUR) var(--GOLD);
+    }
+    50% {
+        color: var(--YELLOW);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--YELLOW), 0px 0px var(--BLOOM_BLUR) var(--YELLOW);
+    }
+    66.667% {
+        color: var(--GREEN);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--GREEN), 0px 0px var(--BLOOM_BLUR) var(--GREEN);
+    }
+    83.333% {
+        color: var(--LIGHT_BLUE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE), 0px 0px var(--BLOOM_BLUR) var(--LIGHT_BLUE);
+    }
+    100% {
+        color: var(--PURPLE);
+        text-shadow: 0px 0px var(--BLOOM_BLUR) var(--PURPLE), 0px 0px var(--BLOOM_BLUR) var(--PURPLE);
+    }
+}

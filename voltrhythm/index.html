@@ -1,68 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-        <title>AWAITING REMOTE SIGNAL</title>
-        <link rel="icon" href="./icon.png">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo">
 
-        <style>
-            body {
-                margin: 0;
-                width: 100vw;
-                height: 100vh;
-                overflow: hidden;
-                background-color: black;
-                font-family: Chivo;
-                color: white;
-            }
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>VOLTRHYTHM</title>
 
-            container {
-                display: flex;
-                width: 100vw;
-                height: 100vh;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-            }
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/colors.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./icon.png">
 
-            * {
-                pointer-events: none;
-                user-select: none;
-                -moz-user-select: none;
-                -webkit-user-select: none;
-                -ms-user-select: none;
-            }
+    <script src="main.js"></script>
+</head>
 
-            img {
-                max-width: 75%;
-            }
-        </style>
-    </head>
+<body>
+    <div id="boxes"></div>
+    <img style="width: 832px;" src="./img/logo.png" alt="VoltRhythm game logo">
+    <p id="description" class="FG-WHITE">A retro-futuristic four-key rhythm game centered around charge</p>
+    <spacer></spacer>
+    <spacer></spacer>
+    <spacer></spacer>
+    <!-- dont worry about this line it's necessary for the effect -->
+    <p class="FG-OVERVOLT"><span>D</span><span>O</span><span>W</span><span>N</span><span>L</span><span>O</span><span>A</span><span>D</span><span> </span><span>V</span><span>O</span><span>L</span><span>T</span><span>R</span><span>H</span><span>Y</span><span>T</span><span>H</span><span>M</span></p>
+    <spacer></spacer>
+    <p class="FG-LIGHT_GRAY">VOLTRHYTHM v0.1.0-alpha</p>
+    <spacer></spacer>
+    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Windows.zip"><box style="width:500px;">
+        <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/windows.png"><p class="FG-LIGHT_BLUE">WINDOWS</p></span>
+        <p class="FG-LIGHT_GRAY">64-BIT VISTA+</p>
+    </box></a>
+    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Linux.AppImage"><box style="width:500px;">
+        <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/linux.png"><p class="FG-AQUA">LINUX</p></span>
+        <p class="FG-LIGHT_GRAY">APPIMAGE</p>
+    </box></a>
+    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Universal.love"><box style="width:500px;">
+        <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/universal.png"><p class="FG-WHITE">UNIVERSAL</p></span>
+        <p class="FG-LIGHT_GRAY">REQUIRES LOVE2D<br>WINDOWS, LINUX, MACOS</p>
+    </box></a>
+    <spacer></spacer>
+    <spacer></spacer>
+    <spacer></spacer>
+    <a target="_blank" href="https://github.com/RGBProductions/VoltRhythm"><box style="width:500px;">
+        <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/github.png"><p class="FG-WHITE">GITHUB</p></span>
+        <p class="FG-LIGHT_GRAY">SOURCE CODE</p>
+    </box></a>
+    <a target="_blank" href="https://rgbproductions.dev/discord"><box style="width:500px;">
+        <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/discord.png"><p class="FG-LIGHT_BLUE">DISCORD</p></span>
+        <p class="FG-LIGHT_GRAY">COMMUNICATION</p>
+    </box></a>
+    <a target="_blank" href="https://rgbproductions.dev" id="brand" class="FG-WHITE"><span class="FG-LIGHT_RED">R</span><span class="FG-LIGHT_GREEN">G</span><span class="FG-LIGHT_BLUE">B</span> Productions 2025</a>
+</body>
 
-    <body>
-        <container>
-            <img id="awaiting" style="display: none;" src="./awaiting.png">
-            <img id="received" style="display: none;" src="./received.png">
-        </container>
-    </body>
-
-    <script>
-        let time = Date.UTC(2025, 4, 24, 22, 0, 0, 0);
-        let delay = time-Date.now();
-
-        if (delay <= 0) {
-            document.getElementById("received").style.display = "initial";
-        } else {
-            document.getElementById("awaiting").style.display = "initial";
-        }
-        
-        setTimeout(() => {
-            document.getElementById("awaiting").style.display = "none";
-            document.getElementById("received").style.display = "initial";
-            location.reload();
-        }, Math.max(5000, Math.min(20000000, delay)));
-    </script>
 </html>

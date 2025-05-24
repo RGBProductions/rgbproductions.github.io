@@ -1,0 +1,162 @@
+* {
+    --BLOOM_BLUR: 8px;
+}
+
+@font-face {
+    font-family: VOLTRPPGS;
+    src: url("../fonts/VOLTRPPGS.ttf");
+}
+
+a {
+    font-family: 'VOLTRPPGS';
+    font-size: 32px;
+    text-decoration: none;
+}
+
+a > box {
+    border-color: var(--DARK_GRAY);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY), inset 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY);
+}
+
+a:focus {
+    outline: none;
+    border: none;
+}
+
+a:hover > box, a:focus > box {
+    border-color: var(--WHITE);
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--WHITE), inset 0px 0px var(--BLOOM_BLUR) var(--WHITE);
+}
+
+box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Somehow keeps the boxes from exploding all over the website. idk */
+    width: fit-content;
+    background-color: var(--BLACK);
+    border: 4px solid var(--WHITE);
+    /* Spacing to ensure the black fill spills outside the border like in the game */
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    box-sizing: border-box;
+
+    box-shadow: 0px 0px var(--BLOOM_BLUR) var(--WHITE), inset 0px 0px var(--BLOOM_BLUR) var(--WHITE);
+}
+
+/* The actual spillover itself */
+/* box::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: -10px;
+    right: -10px;
+    bottom: -18px;
+    background-color: black;
+    z-index: -1;
+} */
+
+p {
+    font-family: 'VOLTRPPGS';
+    color: var(--WHITE);
+    width: fit-content;
+    font-size: 32px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    
+    text-rendering: geometricPrecision;
+    filter: contrast(1);
+    will-change: transform;
+}
+
+spacer {
+    display: block;
+    height: 32px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--BLACK);
+    margin: 0px;
+    margin-bottom: 32px;
+    padding: 0px;
+}
+
+body::after {
+    display: block;
+    position: fixed;
+    pointer-events: none;
+    content: "";
+    z-index: 8;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: linear-gradient(to bottom, transparent, rgba(0.0, 0.0, 0.0, 0.25), rgba(0.0, 0.0, 0.0, 0.5), rgba(0.0, 0.0, 0.0, 0.25));
+    background-size: 100% 4px;
+}
+
+* {
+    cursor: url("../img/cursor.png"), auto;
+    image-rendering: pixelated;
+}
+
+::-webkit-scrollbar {
+    width: 24px;
+    background-color: var(--BLACK);
+    border: 4px solid var(--WHITE);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--WHITE);
+}
+
+img {
+    -webkit-user-drag: none;
+}
+
+#boxes {
+    z-index: -64;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+#boxes::after {
+    display: block;
+    position: fixed;
+    pointer-events: none;
+    content: "";
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background: linear-gradient(to right, transparent 0%, transparent 12.5%, black 25%, black 75%, transparent 87.5%, transparent 100%);
+}
+
+.bgbox {
+    position: absolute;
+}
+
+#description {
+    width: 50%;
+    text-align: center;
+}
+
+#brand {
+    position: fixed;
+    left: 32px;
+    bottom: 32px;
+}
