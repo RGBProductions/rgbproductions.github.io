@@ -13,7 +13,7 @@ Creating your own artwork based on VoltRhythm
 Creating your own narratives based on VoltRhythm
 Creating custom charts for VoltRhythm with the in-game chart editor
 Streaming and recording VoltRhythm gameplay on YouTube, Twitch, etc.
-Contributing songs, charts, and artwork as official VoltRhythm content (get in touch!)
+Contributing songs, charts, and artwork as official VoltRhythm content
 
 
 
