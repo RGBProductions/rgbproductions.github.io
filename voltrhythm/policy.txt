@@ -1,0 +1,41 @@
+We want to provide our community as a place for people to express their talent and creativity, and VoltRhythm is included in this. However, we do need to set some boundaries in order to maintain a healthy community.
+
+All content surrounding VoltRhythm must adhere to this policy. Violating this policy may result in permanent removal from the community. This policy may change at any time.
+
+Please look over all sections carefully so you don't accidentally get yourself in trouble.
+
+
+
+WHAT IS ALLOWED UNDER THIS POLICY
+YOU ARE ALLOWED AND ENCOURAGED TO PERFORM THE FOLLOWING ACTIONS
+
+Creating your own artwork based on VoltRhythm
+Creating your own narratives based on VoltRhythm
+Creating custom charts for VoltRhythm with the in-game chart editor
+Streaming and recording VoltRhythm gameplay on YouTube, Twitch, etc.
+Contributing songs, charts, and artwork as official VoltRhythm content (get in touch!)
+
+
+
+WHAT IS DISCOURAGED UNDER THIS POLICY
+YOU MAY PERFORM THE FOLLOWING ACTIONS AT YOUR OWN RISK
+
+Creating source-code or injected modifications for VoltRhythm
+Creating third-party editors for VoltRhythm content
+Extracting and viewing the assets and code of VoltRhythm ("datamining")
+
+
+
+WHAT IS DISALLOWED UNDER THIS POLICY
+YOU MAY NOT PERFORM ANY OF THE FOLLOWING ACTIONS UNDER ANY CIRCUMSTANCES
+
+Using any VoltRhythm content without explicit permission from the creator
+Using any VoltRhythm content to train generative AI models
+Creating content that is NSFW, derogatory, or discriminatory in nature
+Creating custom content using others' work without explicit permission from the creator(s)
+Creating content that violates laws or infringes on other creators' policies
+Abusing loopholes in the content policy to be a nuisance
+
+
+
+RGB Productions 2025
