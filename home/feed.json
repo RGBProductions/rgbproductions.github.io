@@ -80,7 +80,9 @@
                 "Accuracy displays now have 2 more decimal places of precision. (98% → 98.35%)",
                 "When remapping keybinds, if you press nothing for 5 seconds, it will return to what it was previously.",
                 "Some phrasing has been adjusted.",
-                "You can now rename your profiles in the profiles menu."
+                "You can now rename your profiles in the profiles menu.",
+                "It is now slightly easier to unlock tiny aether rat (battle).",
+                "The charge progress bars on the song disk select menu now have labels for clarity."
             ]},
             {"type": "header", "contents": "Fixes"},
             {"type": "text", "contents": "A game is not a game without bugs. The following bugs were fixed:"},
