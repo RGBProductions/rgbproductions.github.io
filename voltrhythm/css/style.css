@@ -13,7 +13,7 @@ a {
     text-decoration: none;
 }
 
-a > box {
+a > box, button > box {
     border-color: var(--DARK_GRAY);
     box-shadow: 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY), inset 0px 0px var(--BLOOM_BLUR) var(--DARK_GRAY);
 }
@@ -23,7 +23,7 @@ a:focus {
     border: none;
 }
 
-a:hover > box, a:focus > box {
+a:hover > box, a:focus > box, button:hover > box, button:focus > box {
     border-color: var(--WHITE);
     box-shadow: 0px 0px var(--BLOOM_BLUR) var(--WHITE), inset 0px 0px var(--BLOOM_BLUR) var(--WHITE);
 }
@@ -159,4 +159,15 @@ img {
     position: fixed;
     left: 32px;
     bottom: 32px;
+}
+
+.screen-reader-text {
+    position: absolute;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+
+button {
+    all: unset;
 }

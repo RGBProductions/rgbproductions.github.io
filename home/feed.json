@@ -32,5 +32,75 @@
             {"label": "Itch.io", "href": "https://rgbproductions.itch.io/the-slash-of-the-dice"},
             {"label": "GitHub", "href": "https://github.com/RGBProductions/TheSlashOfTheDice/releases/tag/v1.2"}
         ]
+    },
+    {
+        "hidden": false,
+        "published": "May 24, 2025",
+        "title": "VoltRhythm First Public Alpha Release",
+        "contents": [
+            {"type": "text", "contents": "VoltRhythm's first public alpha has been released!"},
+            {"type": "header", "contents": "Featured Tracks"},
+            {"type": "list", "contents": [
+                "RGB - Fracturing Circuit",
+                "AZALI - DIVINITY DISSONANT",
+                "AZALI - unable to rea� save fiĦe",
+                "AZALI - tiny aether rat (battle)",
+                "Return to Nothing - I'm a rhythm gamers worst nightmare"
+            ]},
+            {"type": "image", "src": "/home/img/vr-0.1.0/tinyaetherrat.png", "alt": "Screenshot from the Extreme chart of 'tiny aether rat (battle)' by AZALI.", "caption": "Sample from a difficult chart."}
+        ],
+        "summary": "VoltRhythm's first public alpha has been released!",
+        "thumbnail": "/home/img/vr-0.1.0/thumbnail.png",
+        "images": [],
+        "links": [
+            {"label": "Website", "href": "https://rgbproductions.dev/voltrhythm"},
+            {"label": "Itch.io", "href": "https://rgbproductions.itch.io/voltrhythm"},
+            {"label": "GitHub", "href": "https://github.com/RGBProductions/VoltRhythm"}
+        ]
+    },
+    {
+        "hidden": false,
+        "published": "October 29, 2025",
+        "title": "VoltRhythm v0.1.1-alpha has been released",
+        "contents": [
+            {"type": "text", "contents": "Sorry this version took 5 months!! I've just been quite busy with other work (and also mildly demotivated, hooray)."},
+            {"type": "text", "contents": "But, finally, v0.1.1-alpha is here... and is much larger than I would like a patch version to be, whoops!"},
+            {"type": "header", "contents": "Additions"},
+            {"type": "text", "contents": "There are several major additions in this \"patch\" version:"},
+            {"type": "list", "contents": [
+                "A new border, \"Spooky Pumpkins,\" has been added. (This version was released two days before Halloween, after all)",
+                "You can now play VoltRhythm using a gamepad.",
+                "The keybinds menu is now populated with much more than just the lane keybinds.",
+                "Don't like the backgrounds in the charts? You can now turn them off."
+            ]},
+            {"type": "header", "contents": "Changes"},
+            {"type": "text", "contents": "Some changes were made to improve readability and interaction:"},
+            {"type": "list", "contents": [
+                "Songs that only have one difficulty will no longer display the arrows (↕) in the song select.",
+                "Accuracy displays now have 2 more decimal places of precision. (98% → 98.35%)",
+                "When remapping keybinds, if you press nothing for 5 seconds, it will return to what it was previously.",
+                "Some phrasing has been adjusted.",
+                "You can now rename your profiles in the profiles menu."
+            ]},
+            {"type": "header", "contents": "Fixes"},
+            {"type": "text", "contents": "A game is not a game without bugs. The following bugs were fixed:"},
+            {"type": "list", "contents": [
+                "Error handler crashes due to incorrect font path",
+                "Some note types don't display properly if the normal note's width is different",
+                "Editor is too fast if shift was held when exiting playtest mode",
+                "BPM field in Song Metadata panel in chart editor doesn't work",
+                "The \"freeze_view\" effect crashes the game",
+                "Song select freezes the game if custom song disk only has overvolt",
+                "Game crashes if chart uses more than 4 lanes"
+            ]}
+        ],
+        "summary": "New VoltRhythm version is now available!",
+        "thumbnail": "/home/img/vr-0.1.1/thumbnail.png",
+        "images": [],
+        "links": [
+            {"label": "Website", "href": "https://rgbproductions.dev/voltrhythm"},
+            {"label": "Itch.io", "href": "https://rgbproductions.itch.io/voltrhythm"},
+            {"label": "GitHub", "href": "https://github.com/RGBProductions/VoltRhythm"}
+        ]
     }
 ]

@@ -78,6 +78,19 @@ function createFeedPopout(item) {
                 contents.appendChild(captionElem);
             }
         }
+        if (type == "list") {
+            let listElem = document.createElement("ul");
+            listElem.classList.add("feed-list");
+            for (let line of obj.contents) {
+                let lineElem = document.createElement("li");
+                lineElem.innerText = line;
+                listElem.appendChild(lineElem);
+            }
+            contents.appendChild(listElem);
+            // let lineElem = document.createElement("p");
+            // lineElem.innerText = obj.contents;
+            // contents.appendChild(lineElem);
+        }
     }
 
     let links = document.createElement("div");
@@ -123,6 +136,14 @@ function pushFeed(items) {
     }
 
     for (let itm of items) {
+        let body = "";
+
+        for (let obj of itm.contents) {
+            if (obj.type == "text") {
+                body += obj.contents + " ";
+            }
+        }
+        
         let elem = document.createElement("section");
         elem.classList.add("feed-opener");
 

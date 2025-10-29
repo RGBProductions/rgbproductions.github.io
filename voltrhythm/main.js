@@ -20,6 +20,21 @@ function updateBox(box) {
     box.classList.add(COLORS[Math.floor(Math.random()*COLORS.length)]);
 }
 
+let othersShown = false;
+
+function toggleOtherVersions() {
+    let div = document.getElementById("other-versions");
+    let button = document.getElementById("show-other-versions-text");
+    othersShown = !othersShown;
+    if (othersShown) {
+        div.style.display = "flex";
+        button.innerText = "HIDE OTHER VERSIONS";
+    } else {
+        div.style.display = "none";
+        button.innerText = "SHOW OTHER VERSIONS";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < NUM_BOXES; i++) {
         let box = document.createElement("box");

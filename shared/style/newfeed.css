@@ -53,7 +53,7 @@
 }
 
 .feed-contents>img {
-    width: 75%;
+    max-width: 75%;
     /* width: calc(100vw - 256px - 32px); */
 }
 
@@ -68,6 +68,12 @@
     cursor: pointer;
     align-self: center;
     right: 32px;
+}
+
+.feed-list {
+    width: fit-content;
+    justify-self: center;
+    text-align: left;
 }
 
 @media screen and (max-width: 616px) {

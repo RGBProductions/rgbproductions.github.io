@@ -21,16 +21,21 @@ a.projectlink {
 }
 
 .projectlinks {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 }
 
 .projectimgs {
     margin-bottom: 20px;
 }
 
+.projectimgs > img {
+    max-width: 100%;
+}
+
 .projecttitle {
     font-size: 32px;
     margin-bottom: 0px;
+    margin-top: 8px;
 }
 
 .projectdate {

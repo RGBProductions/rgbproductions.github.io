@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <p class="screen-reader-text">VoltRhythm is, as the name suggests, a rhythm game. If you require a screen reader in order to read this website, you will likely be unable to play this game.</p>
     <div id="boxes"></div>
     <img style="width: 832px;" src="./img/logo.png" alt="VoltRhythm game logo">
     <p id="description" class="FG-WHITE">A retro-futuristic four-key rhythm game centered around charge</p>
@@ -22,24 +23,49 @@
     <spacer></spacer>
     <spacer></spacer>
     <!-- dont worry about this line it's necessary for the effect -->
-    <p class="FG-OVERVOLT"><span>D</span><span>O</span><span>W</span><span>N</span><span>L</span><span>O</span><span>A</span><span>D</span><span> </span><span>V</span><span>O</span><span>L</span><span>T</span><span>R</span><span>H</span><span>Y</span><span>T</span><span>H</span><span>M</span></p>
+    <p aria-hidden="true" class="FG-OVERVOLT"><span>D</span><span>O</span><span>W</span><span>N</span><span>L</span><span>O</span><span>A</span><span>D</span><span> </span><span>V</span><span>O</span><span>L</span><span>T</span><span>R</span><span>H</span><span>Y</span><span>T</span><span>H</span><span>M</span></p>
+    <p class="screen-reader-text">DOWNLOAD VOLTRHYTHM</p>
     <spacer></spacer>
-    <p class="FG-LIGHT_GRAY">VOLTRHYTHM v0.1.0-alpha</p>
+    <p class="FG-LIGHT_GRAY">VOLTRHYTHM v0.1.1-alpha</p>
     <spacer></spacer>
-    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Windows.zip"><box style="width:500px;">
+    <a download aria-label="Download for Windows. 64-bit Vista or newer." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.1-alpha/VoltRhythm-v0.1.1-alpha-Windows.zip"><box style="width:500px;">
         <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/windows.png"><p class="FG-LIGHT_BLUE">WINDOWS</p></span>
         <p class="FG-LIGHT_GRAY">64-BIT VISTA+</p>
     </box></a>
-    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Linux.AppImage"><box style="width:500px;">
+    <a download aria-label="Download for Linux. 64-bit AppImage." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.1-alpha/VoltRhythm-v0.1.1-alpha-Linux.AppImage"><box style="width:500px;">
         <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/linux.png"><p class="FG-AQUA">LINUX</p></span>
         <p class="FG-LIGHT_GRAY">APPIMAGE</p>
     </box></a>
-    <a href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Universal.love"><box style="width:500px;">
+    <a download aria-label="Universal download, for Windows, Linux, MacOS. Requires Love2D framework." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.1-alpha/VoltRhythm-v0.1.1-alpha-Universal.love"><box style="width:500px;">
         <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/universal.png"><p class="FG-WHITE">UNIVERSAL</p></span>
         <p class="FG-LIGHT_GRAY">REQUIRES LOVE2D<br>WINDOWS, LINUX, MACOS</p>
     </box></a>
     <spacer></spacer>
     <spacer></spacer>
+    <spacer></spacer>
+    <button aria-label="Show other versions." onclick="toggleOtherVersions()"><box style="width:384px;">
+        <p id="show-other-versions-text" class="FG-LIGHT_GRAY">SHOW OTHER VERSIONS</p>
+    </box></button>
+    <div id="other-versions" style="display: none; flex-direction: column; align-items: center;">
+        <spacer></spacer>
+        <span style="display: flex; flex-direction: row; width: fit-content; align-items: center;">
+            <p class="FG-LIGHT_GRAY">v0.1.0-alpha</p>
+            <span style="display: block; width: 32px;"></span>
+            <a download aria-label="Download for Windows." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Windows.zip"><box style="width:256px;">
+                <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/windows.png"><p class="FG-LIGHT_BLUE">WINDOWS</p></span>
+            </box></a>
+            <a download aria-label="Download for Linux." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Linux.AppImage"><box style="width:256px;">
+                <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/linux.png"><p class="FG-AQUA">LINUX</p></span>
+            </box></a>
+            <a download aria-label="Universal download." href="https://github.com/RGBProductions/VoltRhythm/releases/download/v0.1.0-alpha/VoltRhythm-v0.1.0-alpha-Universal.love"><box style="width:256px;">
+                <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/universal.png"><p class="FG-WHITE">UNIVERSAL</p></span>
+            </box></a>
+        </span>
+    </div>
+    <spacer></spacer>
+    <spacer></spacer>
+    <spacer></spacer>
+    <p class="FG-LIGHT_GRAY">MORE LINKS</p>
     <spacer></spacer>
     <a target="_blank" href="./policy"><box style="width:500px;">
         <span style="display: flex; flex-direction: row; width: fit-content;"><img style="width: 32px; margin-right: 8px;" src="img/policy.png"><p class="FG-WHITE">CONTENT POLICY</p></span>
