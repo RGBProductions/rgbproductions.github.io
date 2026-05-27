@@ -90,6 +90,8 @@ let mouseSelectedTime = 0;
 let mouseSelectedLane = 0;
 
 let placingNote = undefined;
+let tempoChange = undefined;
+let tempo = "120";
 
 window.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
@@ -115,14 +117,41 @@ function MouseDown(x,y,b) {
     if (clickable(16*scale, (32+80)*scale, 22*scale, 7*scale)) { selectedNoteType = 5; return; }
     if (clickable(16*scale, (32+96)*scale, 22*scale, 7*scale)) { selectedNoteType = 6; return; }
 
-    if (b == 0 && validLanes[selectedNoteType].includes(mouseSelectedLane)) {
-        placingNote = {type: noteTypes[selectedNoteType], time: mouseSelectedTime*1000, lane: mouseSelectedLane, extra: {}};
+    if (b == 0) {
+        if (tempoChange) {
+            let w = 128, h = 96;
+
+            if (clickable((canvas.width - w*scale)/2 + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
+                tempoChange.extra[1] = parseInt(tempo);
+                if (tempoChange == chart.ce_bpmChanges[0]) chart.ce_initialBpm = tempoChange.extra[1];
+                tempoChange = undefined;
+                return;
+            }
+            if (clickable((canvas.width + w*scale)/2 - 64*scale + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
+                tempoChange = undefined;
+                return;
+            }
+            return;
+        }
+
+        for (let change of chart.ce_bpmChanges) {
+            if (clickNote(change.type, change.time, change.lane, change.extra)) {
+                tempoChange = change;
+                tempo = tempoChange.extra[1].toString();
+                return;
+            }
+        }
+        if (validLanes[selectedNoteType].includes(mouseSelectedLane)) {
+            placingNote = {type: noteTypes[selectedNoteType], time: mouseSelectedTime*1000, lane: mouseSelectedLane, extra: {}};
+        }
     }
 
     if (b == 2) {
         for (let note of chart.notes) {
             if (clickNote(note.type,note.time,note.lane,note.extra)) {
                 chart.notes.splice(chart.notes.indexOf(note), 1);
+                let changeIndex = chart.ce_bpmChanges.indexOf(note);
+                if (changeIndex != -1) chart.ce_bpmChanges.splice(changeIndex, 1);
                 break;
             }
         }
@@ -136,6 +165,15 @@ function MouseUp(x,y,b) {
             let endTime = Math.max(placingNote.time, placingNote.extra[1]);
             placingNote.time = time;
             placingNote.extra[1] = endTime;
+        }
+        if (placingNote.type == 3) {
+            placingNote.lane = 0;
+            placingNote.extra[1] = 120;
+            tempoChange = placingNote;
+            tempo = tempoChange.extra[1].toString();
+            chart.ce_bpmChanges.push(tempoChange);
+            chart.ce_bpmChanges.sort((a,b) => (a.time-b.time));
+            if (tempoChange == chart.ce_bpmChanges[0]) chart.ce_initialBpm = tempoChange.extra[1];
         }
         chart.notes.push(placingNote);
         chart.notes.sort((a,b) => (a.time - b.time));
@@ -231,6 +269,12 @@ function drawNote(type, time, lane, extra) {
         }
         case 3: {
             sprites.selectBPMEvent(lanesX-22*scale, y, 22*scale, 7*scale);
+            if (extra[1]) {
+                context.fillStyle = "#ffffff";
+                context.textAlign = "right";
+                context.textBaseline = "top";
+                context.fillText(extra[1], lanesX-26*scale, y-6*scale);
+            }
             break;
         }
         default:
@@ -271,11 +315,11 @@ function MainDraw() {
         sprites.lanes(lanesX, 0, 93*scale, canvas.height);
 
         if (chart && chart.isValid) {
-            let beatTime = 0;
-            let beatDivisor = 0;
             let beatStep = 1/zoom;
+            let beatDivisor = -beatStep;
             let curBPM = chart.ce_initialBpm;
             let bpmChange = 1;
+            let beatTime = -beatStep/curBPM*15;
 
             mouseSelectedTime = 0;
             let closest = Infinity;
@@ -338,6 +382,9 @@ function MainDraw() {
             (x,y,w,h) => sprites.difficulty(5,0,x,y,w,h)
         );
 
+        context.textBaseline = "top";
+        context.textAlign = "left";
+
         context.fillStyle = "#ffffff";
         context.fillText("Notes", 8*scale, 8*scale);
         clickable(16*scale, (32)*scale, 22*scale, 7*scale, sprites.noteChipL);
@@ -351,9 +398,38 @@ function MainDraw() {
 
         context.fillText(`Song time: ${audio.currentTime} s`, 64*scale, 8*scale);
         context.fillText(`Zoom level: ${zoom}x`, 64*scale, 20*scale);
+
+        if (tempoChange) {
+            let w = 128, h = 96;
+            context.fillStyle = "#00000080";
+            context.fillRect(0,0,canvas.width,canvas.height);
+            context.fillStyle = "#000000";
+            context.fillRect((canvas.width - w*scale)/2-2*scale, (canvas.height-h*scale)/2-2*scale, (w+4)*scale, (h+4)*scale);
+            context.strokeStyle = "#ffffff";
+            context.strokeRect((canvas.width - w*scale)/2, (canvas.height-h*scale)/2, w*scale, h*scale);
+            context.fillStyle = "#ffffff";
+            context.textBaseline = "top";
+            context.textAlign = "center";
+            context.fillText(`Tempo Change`, canvas.width/2, (canvas.height-h*scale)/2);
+            context.textBaseline = "bottom";
+            context.fillText(`New Tempo`, canvas.width/2, canvas.height/2);
+            context.textBaseline = "top";
+            context.fillText(tempo, canvas.width/2, canvas.height/2);
+            context.beginPath();
+            context.moveTo((canvas.width-64*scale)/2, canvas.height/2+15*scale);
+            context.lineTo((canvas.width+64*scale)/2, canvas.height/2+15*scale);
+            context.stroke();
+            context.textBaseline = "middle";
+            context.textAlign = "center";
+            clickable((canvas.width - w*scale)/2 + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale, (x,y,w,h) => context.strokeRect(x,y,w,h));
+            clickable((canvas.width + w*scale)/2 - 64*scale + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale, (x,y,w,h) => context.strokeRect(x,y,w,h));
+            context.fillText("Confirm", (canvas.width-w*scale)/2 + 4*scale + 28*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale + 8*scale);
+            context.fillText("Cancel", (canvas.width + w*scale)/2 - 64*scale + 4*scale + 28*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale + 8*scale);
+        }
     }
 
     context.textBaseline = "bottom";
+    context.textAlign = "left";
     context.fillStyle = "#ff0000";
     if (!audio.src) {
         context.fillText("Please provide an audio file!", 8*scale, canvas.height-15*scale);
@@ -387,7 +463,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.0`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.1`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
@@ -442,6 +518,15 @@ window.addEventListener("wheel", (e) => {
 
 window.addEventListener("keydown", (e) => {
     let k = e.key.toLowerCase();
+    if (tempoChange) {
+        let num = parseInt(k);
+        if (num == num) {
+            tempo += num;
+        }
+        if (k == "backspace") {
+            tempo = tempo.substring(0,tempo.length-1);
+        }
+    }
     if (k == " ") {
         e.preventDefault();
         if (!audio.src) return;
