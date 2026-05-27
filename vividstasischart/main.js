@@ -318,6 +318,7 @@ function MainDraw() {
             let beatStep = 1/zoom;
             let beatDivisor = -beatStep;
             let curBPM = chart.ce_initialBpm;
+            if (curBPM <= 0) curBPM = 120;
             let bpmChange = 1;
             let beatTime = -beatStep/curBPM*15;
 
@@ -330,7 +331,7 @@ function MainDraw() {
                 if (next > change.time/1000) {
                     let remainder = (next-change.time/1000)/15*curBPM;
                     beatTime = change.time/1000;
-                    curBPM = change.extra[1];
+                    if (change.extra[1] > 0) curBPM = change.extra[1];
                     bpmChange ++;
                     next = beatTime + remainder/curBPM*15;
                 }
@@ -463,7 +464,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.1`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.2`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
