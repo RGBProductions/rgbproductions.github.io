@@ -257,11 +257,11 @@ function drawNote(type, time, lane, extra) {
         case 2: {
             let y2 = getNoteY(extra[1]/1000);
             if (lane < 2) {
-                sprites.noteHoldL(x, Math.min(y2,y)+7*scale, 22*scale, Math.abs(y2-y)-7*scale);
+                sprites.noteHoldL(x, Math.min(y2,y)+7*scale, 22*scale, Math.abs(y2-y)-4*scale);
                 sprites.noteChipL(x, y, 22*scale, 7*scale);
                 sprites.noteChipL(x, y2+7*scale, 22*scale, 7*scale);
             } else {
-                sprites.noteHoldR(x, Math.min(y2,y)+7*scale, 22*scale, Math.abs(y2-y)-7*scale);
+                sprites.noteHoldR(x, Math.min(y2,y)+7*scale, 22*scale, Math.abs(y2-y)-4*scale);
                 sprites.noteChipR(x, y, 22*scale, 7*scale);
                 sprites.noteChipR(x, y2+7*scale, 22*scale, 7*scale);
             }
@@ -397,7 +397,7 @@ function MainDraw() {
         clickable(16*scale, (32+96)*scale, 22*scale, 7*scale, sprites.selectModEvent);
         sprites.arrow(8*scale, (32+selectedNoteType*16)*scale, 4*scale, 7*scale);
 
-        context.fillText(`Song time: ${audio.currentTime} s`, 64*scale, 8*scale);
+        context.fillText(`Song time: ${Math.floor(audio.currentTime*1000)/1000} s`, 64*scale, 8*scale);
         context.fillText(`Zoom level: ${zoom}x`, 64*scale, 20*scale);
 
         if (tempoChange) {
@@ -464,7 +464,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.2`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.3`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
