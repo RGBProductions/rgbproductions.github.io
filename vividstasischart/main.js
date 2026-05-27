@@ -122,7 +122,7 @@ function MouseDown(x,y,b) {
             let w = 128, h = 96;
 
             if (clickable((canvas.width - w*scale)/2 + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
-                tempoChange.extra[1] = parseInt(tempo);
+                tempoChange.extra[1] = parseFloat(tempo);
                 if (tempoChange == chart.ce_bpmChanges[0]) chart.ce_initialBpm = tempoChange.extra[1];
                 tempoChange = undefined;
                 return;
@@ -464,7 +464,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.3`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.4`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
@@ -521,8 +521,8 @@ window.addEventListener("keydown", (e) => {
     let k = e.key.toLowerCase();
     if (tempoChange) {
         let num = parseInt(k);
-        if (num == num) {
-            tempo += num;
+        if (num == num || k == ".") {
+            tempo += k;
         }
         if (k == "backspace") {
             tempo = tempo.substring(0,tempo.length-1);
