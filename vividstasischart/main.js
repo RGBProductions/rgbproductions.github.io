@@ -262,6 +262,7 @@ function MouseDown(x,y,b) {
                         mods: [],
                         perFrame: []
                     }
+                    proxiesStr = chart.mods.data.proxies.toString();
                 }
             }
             
@@ -269,9 +270,11 @@ function MouseDown(x,y,b) {
             if (clickable((canvas.width-128*scale)/2, ty+72*scale, 128*scale, 12*scale)) gimmickField = 1;
 
             if (clickable((canvas.width - 56*scale)/2, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
-                let proxies = parseInt(proxiesStr)
-                if (proxies != proxies) proxies = 1;
-                chart.mods.data.proxies = proxies;
+                if (chart.mods) {
+                    let proxies = parseInt(proxiesStr)
+                    if (proxies != proxies) proxies = 1;
+                    chart.mods.data.proxies = proxies;
+                }
                 gimmickConfig = false;
             }
             return;
@@ -333,7 +336,7 @@ function MouseDown(x,y,b) {
             if (clickable(canvas.width - 96*scale - 8*scale, 152*scale, 96*scale, 16*scale)) {
                 gimmickConfig = true;
                 gimmickField = 0;
-                proxiesStr = chart.mods.data.proxies.toString();
+                if (chart.mods) proxiesStr = chart.mods.data.proxies.toString();
             }
         }
 
