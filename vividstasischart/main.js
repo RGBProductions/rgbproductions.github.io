@@ -38,6 +38,7 @@ const sprites = {
     indicatorM: spriteDefinition(151, 86, 9, 7),
     indicatorR: spriteDefinition(161, 86, 9, 7),
     arrow: spriteDefinition(171, 86, 4, 7),
+    arrowL: spriteDefinition(176, 86, 4, 7),
     difficulty(diff, level, x, y, w=44, h=11) {
         context.drawImage(spritesheet, 95, 70+12*diff, 44, 11, x, y, w, h);
         let sx = w/44, sy = h/11;
@@ -101,6 +102,8 @@ let modField = 0;
 let modFields = ["unknown","0","0","0","linear","-1"];
 let modError = false;
 let gimmickConfig = false;
+let gimmickField = 0;
+let proxiesStr = "1";
 let disableGimmickWarning = false;
 let tempoChange = undefined;
 let tempo = "120";
@@ -227,7 +230,7 @@ function MouseDown(x,y,b) {
         }
 
         if (disableGimmickWarning) {
-            let w = 128, h = 96;
+            let w = 200, h = 96;
             if (clickable((canvas.width - w*scale)/2 + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
                 chart.mods = undefined;
                 disableGimmickWarning = false;
@@ -241,11 +244,13 @@ function MouseDown(x,y,b) {
         }
 
         if (gimmickConfig) {
-            let w = 144, h = 96;
+            let w = 144, h = 128;
             let txt = "Enable Gimmicks";
             let metric = context.measureText(txt);
-            let tw = metric.width + 9.5*scale;
-            if (clickable((canvas.width-tw)/2, (canvas.height-8*scale)/2-15*scale, 8*scale, 8*scale, (x,y,w,h) => context.strokeRect(x,y,w,h))) {
+            let tw = metric.width + 11.5*scale;
+
+            let ty = (canvas.height-h*scale)/2+16*scale;
+            if (clickable((canvas.width-tw)/2, ty+5*scale, 8*scale, 8*scale)) {
                 if (chart.mods) {
                     disableGimmickWarning = true;
                 } else {
@@ -259,7 +264,14 @@ function MouseDown(x,y,b) {
                     }
                 }
             }
+            
+            if (clickable((canvas.width-128*scale)/2, ty+36*scale, 128*scale, 12*scale)) gimmickField = 0;
+            if (clickable((canvas.width-128*scale)/2, ty+72*scale, 128*scale, 12*scale)) gimmickField = 1;
+
             if (clickable((canvas.width - 56*scale)/2, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
+                let proxies = parseInt(proxiesStr)
+                if (proxies != proxies) proxies = 1;
+                chart.mods.data.proxies = proxies;
                 gimmickConfig = false;
             }
             return;
@@ -318,7 +330,11 @@ function MouseDown(x,y,b) {
             if (clickable(canvas.width - 96*scale - 8*scale, 92*scale, 96*scale, 16*scale)) clearingNotes = 4;
 
             if (clickable(canvas.width - 96*scale - 8*scale, 132*scale, 96*scale, 16*scale)) copyingMods = true;
-            if (clickable(canvas.width - 96*scale - 8*scale, 152*scale, 96*scale, 16*scale)) gimmickConfig = true;
+            if (clickable(canvas.width - 96*scale - 8*scale, 152*scale, 96*scale, 16*scale)) {
+                gimmickConfig = true;
+                gimmickField = 0;
+                proxiesStr = chart.mods.data.proxies.toString();
+            }
         }
 
         if (clickable(64*scale, 20*scale + 16*scale, 11*scale, 11*scale)) {
@@ -338,6 +354,12 @@ function MouseDown(x,y,b) {
         }
         if (clickable(64*scale+16*scale, 70*scale + 16*scale, 11*scale, 11*scale)) {
             audio.volume = Math.min(1, (audio.volume*100+5)/100);
+        }
+        if (clickable(64*scale, 95*scale + 16*scale, 11*scale, 11*scale)) {
+            scale = Math.max(1, scale-1);
+        }
+        if (clickable(64*scale+16*scale, 95*scale + 16*scale, 11*scale, 11*scale)) {
+            scale = Math.min(5, scale+1);
         }
 
         if (chart && chart.isValid) {
@@ -581,8 +603,9 @@ function MainDraw() {
     context.textBaseline = "top";
     context.textAlign = "left";
     context.font = `${16*scale}px Monaco`;
+    context.lineWidth = scale;
     canvas.style.cursor = "default";
-
+    
     if (imagesAvailable) {
         context.imageSmoothingEnabled = false;
 
@@ -630,7 +653,6 @@ function MainDraw() {
                     context.beginPath();
                     context.moveTo(lanesX, y);
                     context.lineTo(lanesX+93*scale, y);
-                    context.lineWidth = scale;
                     context.strokeStyle = beatDivisor <= 0.05 ? "#FFFFFF80" : "#FFFFFF20";
                     context.stroke();
                 }
@@ -719,8 +741,8 @@ function MainDraw() {
         context.fillText(`Zoom level: ${zoom}x`, 64*scale, 20*scale);
         context.fillText(`Subdivisions: ${beatSnaps}`, 64*scale, 45*scale);
         context.fillText(`Music volume: ${Math.floor(audio.volume*100)}%`, 64*scale, 70*scale);
+        context.fillText(`UI scale: ${scale}x`, 64*scale, 95*scale);
         context.strokeStyle = "#ffffff";
-        context.lineWidth = scale;
         context.textBaseline = "middle";
         context.textAlign = "center";
         
@@ -744,6 +766,13 @@ function MainDraw() {
         context.fillStyle = audio.volume >= 1 ? "#404040" : "#ffffff";
         context.strokeStyle = context.fillStyle;
         clickable(64*scale+16*scale, 70*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("+", x+6*scale, y+4.5*scale)});
+        
+        context.fillStyle = scale == 1 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale, 95*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("-", x+6*scale, y+4.5*scale)});
+        context.fillStyle = scale == 5 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale+16*scale, 95*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("+", x+6*scale, y+4.5*scale)});
 
         context.fillStyle = "#ffffff";
         context.strokeStyle = "#ffffff";
@@ -848,7 +877,7 @@ function MainDraw() {
         }
 
         if (gimmickConfig) {
-            let w = 144, h = 96;
+            let w = 144, h = 128;
             context.fillStyle = "#00000080";
             context.fillRect(0,0,canvas.width,canvas.height);
             context.fillStyle = "#000000";
@@ -859,23 +888,39 @@ function MainDraw() {
             context.textBaseline = "top";
             context.textAlign = "center";
             context.fillText("Configure Gimmicks", canvas.width/2, (canvas.height-h*scale)/2);
-            context.textBaseline = "bottom";
             context.textAlign = "left";
             let txt = "Enable Gimmicks";
             let metric = context.measureText(txt);
-            let tw = metric.width + 9.5*scale;
-            clickable((canvas.width-tw)/2, (canvas.height-8*scale)/2-15*scale, 8*scale, 8*scale, (x,y,w,h) => context.strokeRect(x,y,w,h));
-            context.fillText(txt, (canvas.width-tw)/2+9.5*scale, canvas.height/2-8*scale);
+            let tw = metric.width + 11.5*scale;
+
+            let ty = (canvas.height-h*scale)/2+16*scale;
+            
+            clickable((canvas.width-tw)/2, ty+5*scale, 8*scale, 8*scale, (x,y,w,h) => context.strokeRect(x,y,w,h));
+            context.fillText(txt, (canvas.width-tw)/2+11.5*scale, ty);
             if (chart.mods) {
-                context.fillRect((canvas.width-tw)/2+2*scale, (canvas.height-8*scale)/2-15*scale+2*scale, 4*scale, 4*scale);
+                context.fillRect((canvas.width-tw)/2+2*scale, ty+7*scale, 4*scale, 4*scale);
                 context.textAlign = "center";
-                context.fillText("Gimmick Object", canvas.width/2, canvas.height/2+8*scale);
-                context.textBaseline = "top";
-                context.fillText(chart.mods.data.obj, canvas.width/2, canvas.height/2+8*scale);
+                
+                context.fillText("Gimmick Object", canvas.width/2, ty+20*scale);
+                context.fillText(chart.mods.data.obj, canvas.width/2, ty+32*scale);
                 context.beginPath();
-                context.moveTo((canvas.width-128*scale)/2, canvas.height/2+23*scale);
-                context.lineTo((canvas.width+128*scale)/2, canvas.height/2+23*scale);
+                context.moveTo((canvas.width-128*scale)/2, ty+48*scale);
+                context.lineTo((canvas.width+128*scale)/2, ty+48*scale);
                 context.stroke();
+                clickable((canvas.width-128*scale)/2, ty+36*scale, 128*scale, 12*scale, () => {});
+                
+                context.fillText("Proxies", canvas.width/2, ty+56*scale);
+                context.fillText(proxiesStr, canvas.width/2, ty+68*scale);
+                context.beginPath();
+                context.moveTo((canvas.width-128*scale)/2, ty+84*scale);
+                context.lineTo((canvas.width+128*scale)/2, ty+84*scale);
+                context.stroke();
+                clickable((canvas.width-128*scale)/2, ty+72*scale, 128*scale, 12*scale, () => {});
+
+                let ay = ty+38*scale + gimmickField*36*scale;
+                let aw = context.measureText(gimmickField == 0 ? chart.mods.data.obj : proxiesStr).width;
+                sprites.arrow((canvas.width-aw)/2-8*scale, ay, 4*scale, 7*scale);
+                sprites.arrowL((canvas.width+aw)/2+4*scale, ay, 4*scale, 7*scale);
             }
             context.textBaseline = "top";
             context.textBaseline = "middle";
@@ -1045,7 +1090,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.6`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.7`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
@@ -1120,10 +1165,20 @@ window.addEventListener("keydown", (e) => {
     }
     if (gimmickConfig) {
         if (chart.mods) {
-            if (k == "backspace") {
-                chart.mods.data.obj = chart.mods.data.obj.substring(0,chart.mods.data.obj.length-1);
-            } else if (k.length == 1) {
-                chart.mods.data.obj += e.key;
+            if (gimmickField == 0) {
+                if (k == "backspace") {
+                    chart.mods.data.obj = chart.mods.data.obj.substring(0,chart.mods.data.obj.length-1);
+                } else if (k.length == 1) {
+                    chart.mods.data.obj += e.key;
+                }
+            } else {
+                let num = parseInt(k);
+                if (num == num) {
+                    proxiesStr += k;
+                }
+                if (k == "backspace") {
+                    proxiesStr = proxiesStr.substring(0,proxiesStr.length-1);
+                }
             }
         }
     }
