@@ -300,6 +300,21 @@ addGimmick("obj_unraveling_gimmick", [
     ["wflash"],["rainbow"],["sides"],["notealp"],["video"],["noteoverlayalp"]
 ])
 
+function getModByteFromName(name, oname) {
+    let mods = globalMods;
+
+    if (name in mods) return mods[name];
+
+    let obj = gimmicks[oname];
+
+    if (obj) {
+        return obj.extraMods[name];
+    }
+
+    console.error(`Unknown mod ${name}`);
+    return globalMods.unknown;
+}
+
 function getModNameFromByte(b, name) {
     let mods = globalMods;
 
@@ -319,4 +334,4 @@ function getModNameFromByte(b, name) {
     console.error(`Unknown mod ${b}`);
 }
 
-export {gimmicks, globalMods, modWeight, getModNameFromByte};
+export {gimmicks, globalMods, modWeight, getModNameFromByte, getModByteFromName};

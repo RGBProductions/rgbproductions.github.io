@@ -221,7 +221,7 @@ function beatToMs(bpmList, beat) {
         else
             l = mid;
     }
-    return bpmList[l].start_time + (((beat - bpmList[l].start_beat) / bpmList[l].bpm) * 60);
+    return bpmList[l].start_time/1000 + (((beat - bpmList[l].start_beat) / bpmList[l].bpm) * 60);
 }
 
 export class VSChart {
@@ -256,7 +256,6 @@ export class VSChart {
                             let note = readNote(vbuf);
                             this.notes.push(note);
                             if (note.type == 3) {
-                                if (this.ce_bpmChanges.length == 0) this.ce_initialBpm = note.extra[1];
                                 this.ce_bpmChanges.push(note);
                             }
                         } else if (flag2 == ChartDataFlag.NOTES_END) break;
@@ -324,6 +323,7 @@ export class VSChart {
                 if (flag == ChartDataFlag.END) break;
             }
 
+            this.ce_initialBpm = (this.ce_bpmChanges[0] ?? {extra: {}}).extra[1] ?? 120;
             this.isValid = true;
             if (this.mods) this.mods.mods.sort((a,b) => a.b-b.b);
             this.updateBpmChangeTimes();
