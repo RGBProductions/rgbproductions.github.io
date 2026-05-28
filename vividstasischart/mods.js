@@ -288,7 +288,7 @@ addGimmick("obj_supernova_gimmick", [
 ])
 addGimmick("obj_times_gimmick", [
     ["glitchamp"],["static"],["wflash"],["tx"],["tx2"],["tx3"],["txj"],["ty"],["ty2"],["ty3"],["tyj"],["trz"],["trz2"],
-    ["tz"],["tzx"],["tzy"],["tspl"],["sepx"],["sepy"],["spinang"],["spinrad"],["siny"],["vib"],["hid1", i],["hid2", i],["hid3", i],["hid4", i],["hid5", i]
+    ["tz"],["tzx"],["tzy"],["tspl"],["sepx"],["sepy"],["spinang"],["spinrad"],["siny"],["vib"],["hid1"],["hid2"],["hid3"],["hid4"],["hid5"]
 ])
 addGimmick("obj_tutorial_gimmick", [
     ["glitchamp"],["uialpha"],["cover1"],["scorealph"],["bgalph"],["noteoverlayalp"],["sg_endblip"],
