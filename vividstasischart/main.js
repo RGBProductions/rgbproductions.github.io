@@ -52,6 +52,7 @@ let noteTypes = [0, 1, 8, 6, 7, 3];
 
 let scrollSpeed = 10;
 let zoom = 1;
+let beatSnaps = 4;
 
 let audio = new Audio();
 
@@ -68,6 +69,8 @@ function getNoteY(time) {
 }
 
 let scale = 4;
+
+let offset = 0;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -125,6 +128,8 @@ function MouseDown(x,y,b) {
                 tempoChange.extra[1] = parseFloat(tempo);
                 if (tempoChange == chart.ce_bpmChanges[0]) chart.ce_initialBpm = tempoChange.extra[1];
                 tempoChange = undefined;
+                chart.updateBpmChangeTimes();
+                chart.updateModTimes();
                 return;
             }
             if (clickable((canvas.width + w*scale)/2 - 64*scale + 4*scale, (canvas.height+h*scale)/2 - 16*scale - 4*scale, 56*scale, 16*scale)) {
@@ -134,15 +139,31 @@ function MouseDown(x,y,b) {
             return;
         }
 
-        for (let change of chart.ce_bpmChanges) {
-            if (clickNote(change.type, change.time, change.lane, change.extra)) {
-                tempoChange = change;
-                tempo = tempoChange.extra[1].toString();
-                return;
-            }
+
+        if (clickable(64*scale, 20*scale + 16*scale, 11*scale, 11*scale)) {
+            zoom = Math.max(1, zoom-1);
         }
-        if (validLanes[selectedNoteType].includes(mouseSelectedLane)) {
-            placingNote = {type: noteTypes[selectedNoteType], time: mouseSelectedTime*1000, lane: mouseSelectedLane, extra: {}};
+        if (clickable(64*scale+16*scale, 20*scale + 16*scale, 11*scale, 11*scale)) {
+            zoom = Math.min(16, zoom+1);
+        }
+        if (clickable(64*scale, 45*scale + 16*scale, 11*scale, 11*scale)) {
+            beatSnaps = Math.max(1, beatSnaps-1);
+        }
+        if (clickable(64*scale+16*scale, 45*scale + 16*scale, 11*scale, 11*scale)) {
+            beatSnaps = Math.min(16, beatSnaps+1);
+        }
+
+        if (chart && chart.isValid) {
+            for (let change of chart.ce_bpmChanges) {
+                if (clickNote(change.type, change.time, change.lane, change.extra)) {
+                    tempoChange = change;
+                    tempo = tempoChange.extra[1].toString();
+                    return;
+                }
+            }
+            if (validLanes[selectedNoteType].includes(mouseSelectedLane)) {
+                placingNote = {type: noteTypes[selectedNoteType], time: mouseSelectedTime*1000, lane: mouseSelectedLane, extra: {}};
+            }
         }
     }
 
@@ -174,6 +195,8 @@ function MouseUp(x,y,b) {
             chart.ce_bpmChanges.push(tempoChange);
             chart.ce_bpmChanges.sort((a,b) => (a.time-b.time));
             if (tempoChange == chart.ce_bpmChanges[0]) chart.ce_initialBpm = tempoChange.extra[1];
+            chart.updateBpmChangeTimes();
+            chart.updateModTimes();
         }
         chart.notes.push(placingNote);
         chart.notes.sort((a,b) => (a.time - b.time));
@@ -315,12 +338,12 @@ function MainDraw() {
         sprites.lanes(lanesX, 0, 93*scale, canvas.height);
 
         if (chart && chart.isValid) {
-            let beatStep = 1/zoom;
+            let beatStep = (4/beatSnaps)/zoom;
             let beatDivisor = -beatStep;
             let curBPM = chart.ce_initialBpm;
             if (curBPM <= 0) curBPM = 120;
             let bpmChange = 1;
-            let beatTime = -beatStep/curBPM*15;
+            let beatTime = -beatStep/curBPM*15 + offset;
 
             mouseSelectedTime = 0;
             let closest = Infinity;
@@ -351,7 +374,7 @@ function MainDraw() {
                     context.moveTo(lanesX, y);
                     context.lineTo(lanesX+93*scale, y);
                     context.lineWidth = scale;
-                    context.strokeStyle = beatDivisor == 0 ? "#FFFFFF80" : "#FFFFFF20";
+                    context.strokeStyle = beatDivisor <= 0.05 ? "#FFFFFF80" : "#FFFFFF20";
                     context.stroke();
                 }
             }
@@ -371,6 +394,40 @@ function MainDraw() {
             }
 
             if (placingNote) drawNote(placingNote.type, placingNote.time, placingNote.lane, placingNote.extra);
+
+            if (chart.mods) {
+                let stacked = {};
+                context.fillStyle = "#ffffff";
+                context.textAlign = "left";
+                context.textBaseline = "top";
+                for (let mod of chart.mods.mods) {
+                    if (!(mod.b in stacked)) {
+                        stacked[mod.b] = {time: mod.time, mods: []};
+                    }
+                    stacked[mod.b].mods.push(mod.m);
+                }
+                for (let [time,obj] of Object.entries(stacked)) {
+                    let y = getNoteY(obj.time);
+                    let hovered = clickable(lanesX+93*scale, y, 22*scale, 7*scale, sprites.selectModEvent);
+                    let txt = obj.mods.join(", ");
+                    let metric = context.measureText(txt);
+                    let collapsed = false;
+                    if (lanesX+119*scale+metric.width >= canvas.width) {
+                        txt = `${obj.mods.length} mods`;
+                        collapsed = true;
+                    }
+                    if (hovered && collapsed) {
+                        let i = 0;
+                        let dir = y-6*scale+8*scale*(obj.mods.length+1) >= canvas.height-15*scale ? -1 : 1;
+                        for (let mod of obj.mods) {
+                            context.fillText(mod, lanesX+119*scale, y-6*scale+8*scale*i*dir);
+                            i++;
+                        }
+                    } else {
+                        context.fillText(txt, lanesX+119*scale, y-6*scale);
+                    }
+                }
+            }
         }
 
         context.fillStyle = "#000000";
@@ -399,6 +456,25 @@ function MainDraw() {
 
         context.fillText(`Song time: ${Math.floor(audio.currentTime*1000)/1000} s`, 64*scale, 8*scale);
         context.fillText(`Zoom level: ${zoom}x`, 64*scale, 20*scale);
+        context.fillText(`Subdivisions: ${beatSnaps}`, 64*scale, 45*scale);
+        context.strokeStyle = "#ffffff";
+        context.lineWidth = scale;
+        context.textBaseline = "middle";
+        context.textAlign = "center";
+        
+        context.fillStyle = zoom == 1 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale, 20*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("-", x+6*scale, y+4.5*scale)});
+        context.fillStyle = zoom == 16 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale+16*scale, 20*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("+", x+6*scale, y+4.5*scale)});
+        
+        context.fillStyle = beatSnaps == 1 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale, 45*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("-", x+6*scale, y+4.5*scale)});
+        context.fillStyle = beatSnaps == 16 ? "#404040" : "#ffffff";
+        context.strokeStyle = context.fillStyle;
+        clickable(64*scale+16*scale, 45*scale + 16*scale, 11*scale, 11*scale, (x,y,w,h) => {context.strokeRect(x,y,w,h); context.fillText("+", x+6*scale, y+4.5*scale)});
 
         if (tempoChange) {
             let w = 128, h = 96;
@@ -464,7 +540,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.4`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.5`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
@@ -499,6 +575,7 @@ window.addEventListener("drop", (e) => {
     reader.addEventListener("load", (data) => {
         if (file.name.endsWith(".vsb")) {
             chart = new VSChart(new Uint8Array(data.target.result));
+            window.chart = chart;
         }
         if (file.type.startsWith("audio/")) {
             let url = URL.createObjectURL(file);
@@ -512,6 +589,8 @@ window.addEventListener("wheel", (e) => {
     e.preventDefault();
     if (e.ctrlKey) {
         zoom = Math.max(1, Math.min(16, zoom - Math.sign(e.deltaY)));
+    } else if (e.shiftKey) {
+        beatSnaps = Math.max(1, Math.min(16, beatSnaps - Math.sign(e.deltaY)));
     } else {
         audio.currentTime -= e.deltaY/1000/zoom;
     }

@@ -1,3 +1,5 @@
+import { getModNameFromByte, modWeight } from "./mods.js";
+
 const buffer_u8 = 1;
 const buffer_s8 = 2;
 const buffer_u16 = 3;
@@ -27,7 +29,12 @@ const ChartDataFlag = {
     NOTES_END: 193,
     MODS: 224,
     MODS_END: 225,
-    MOD: 226,
+    GIMMICK: 226,
+    GIMMICK_END: 227,
+    MOD_PROXIES: 228,
+    MOD_OBJ: 229,
+    MOD: 233,
+    PERFRAME: 236,
     END: 255
 }
 
@@ -60,6 +67,36 @@ function typeToBufferType(t) {
         case 7:
             return buffer_s8;
     }
+}
+
+let easeBytes = {
+    linear: 1,
+    outElastic: 2,
+    inExpo: 3,
+    outExpo: 4,
+    inOutExpo: 5,
+    inQuad: 6,
+    outQuad: 7,
+    inOutQuad: 8,
+    inCubic: 9,
+    outCubic: 10,
+    inOutCubic: 11,
+    outBack: 12,
+    inSine: 13,
+    outSine: 14,
+    inOutSine: 15,
+    outQuart: 16,
+    inOutCirc: 17,
+    inCirc: 18,
+    outCirc: 19
+}
+
+function getEaseFromByte(b) {
+    return Object.keys(easeBytes)[Object.values(easeBytes).indexOf(b)];
+}
+
+function getByteFromEase(e) {
+    return easeBytes[e];
 }
 
 function readNote(buffer) {
@@ -163,6 +200,30 @@ function putFloat32(buf, v) {
     buf.push(view.getUint8(3));
 }
 
+/**
+ * @param {Array} buf 
+ * @param {string} v 
+ */
+function putString(buf, v) {
+    for (let i = 0; i < v.length; i++) {
+        buf.push(v.charCodeAt(i));
+    }
+    buf.push(0);
+}
+
+function beatToMs(bpmList, beat) {
+    let l = 0;
+    let r = bpmList.length-1;
+    while (l < r) {
+        let mid = Math.floor((l+r+1)/2);
+        if (beat < bpmList[mid].start_beat)
+            r = mid-1;
+        else
+            l = mid;
+    }
+    return bpmList[l].start_time + (((beat - bpmList[l].start_beat) / bpmList[l].bpm) * 60);
+}
+
 export class VSChart {
     /**
      * @param {Uint8Array?} buffer 
@@ -170,7 +231,7 @@ export class VSChart {
     constructor(buffer) {
         this.isValid = true;
         this.notes = [];
-        this.mods = [];
+        this.mods = undefined;
 
         this.ce_bpmChanges = [];
         this.ce_initialBpm = 120;
@@ -202,10 +263,60 @@ export class VSChart {
                     }
                 }
                 if (flag == ChartDataFlag.MODS) {
-                    // TODO: Parse mods
+                    let data = {
+                        proxies: 1,
+                        obj: "obj_base_gimmick"
+                    }
+                    let modlist = [];
+                    let perframelist = [];
+                    let obj = undefined;
+
                     while (true) {
                         let flag2 = vbuf.read(buffer_u8);
-                        if (flag2 == ChartDataFlag.MOD) {
+                        switch (flag2) {
+                            case ChartDataFlag.MOD_PROXIES:
+                                data.proxies = vbuf.read(buffer_u8);
+                                break;
+                            case ChartDataFlag.MOD_OBJ:
+                                data.obj = vbuf.read(buffer_string);
+                                break;
+                        }
+                        if (flag2 == ChartDataFlag.GIMMICK) {
+                            while (true) {
+                                let flag3 = vbuf.read(buffer_u8);
+
+                                if (flag3 == ChartDataFlag.MOD) {
+                                    let mod = {};
+
+                                    mod.b = vbuf.read(buffer_f32);
+                                    mod.d = vbuf.read(buffer_f32);
+                                    mod.e = getEaseFromByte(vbuf.read(buffer_u8));
+                                    mod.v1 = vbuf.read(buffer_f32);
+                                    mod.v2 = vbuf.read(buffer_f32);
+                                    mod.mi = vbuf.read(buffer_u8);
+                                    mod.p = vbuf.read(buffer_s8);
+                                    mod.m = getModNameFromByte(mod.mi, data.obj);
+                                    mod.w = modWeight[mod.m];
+
+                                    modlist.push(mod);
+                                } else if (flag3 == ChartDataFlag.PERFRAME) {
+                                    let mod = {};
+
+                                    mod.b = vbuf.read(buffer_f32);
+                                    mod.e = vbuf.read(buffer_f32);
+                                    mod.f = vbuf.read(buffer_string);
+                                    
+                                    perframelist.push(mod);
+                                }
+
+                                if (flag3 == ChartDataFlag.GIMMICK_END) break;
+                            }
+
+                            this.mods = {
+                                mods: modlist,
+                                perFrame: perframelist,
+                                data: data
+                            }
                         }
                         if (flag2 == ChartDataFlag.MODS_END) break;
                     }
@@ -214,6 +325,36 @@ export class VSChart {
             }
 
             this.isValid = true;
+            if (this.mods) this.mods.mods.sort((a,b) => a.b-b.b);
+            this.updateBpmChangeTimes();
+            this.updateModTimes();
+        }
+    }
+
+    updateBpmChangeTimes() {
+        let bpm = this.ce_initialBpm;
+        let lastBpmChangeTime = 0;
+        let lastBpmChangeBeats = 0;
+        for (let change of this.ce_bpmChanges) {
+            let newBpm = change.extra[1];
+            if (newBpm != undefined) {
+                let oldBeatDuration = 60000/bpm;
+                let beatsSinceChange = (change.time - lastBpmChangeTime) / oldBeatDuration;
+                let totalBeats = beatsSinceChange + lastBpmChangeBeats;
+                change.start_time = change.time;
+                change.start_beat = totalBeats;
+                change.bpm = newBpm;
+                bpm = newBpm;
+                lastBpmChangeBeats = totalBeats;
+                lastBpmChangeTime = change.time;
+            }
+        }
+    }
+
+    updateModTimes() {
+        if (!this.mods) return;
+        for (let mod of this.mods.mods) {
+            mod.time = beatToMs(this.ce_bpmChanges, mod.b);
         }
     }
 
@@ -240,6 +381,34 @@ export class VSChart {
             bytes.push(NoteDataFlag.END);
         }
         bytes.push(ChartDataFlag.NOTES_END);
+
+        if (this.mods) {
+            bytes.push(ChartDataFlag.MODS);
+            bytes.push(ChartDataFlag.MOD_PROXIES);
+            bytes.push(this.mods.data.proxies);
+            bytes.push(ChartDataFlag.MOD_OBJ);
+            putString(bytes, this.mods.data.obj);
+            bytes.push(ChartDataFlag.GIMMICK);
+            for (let mod of this.mods.mods) {
+                bytes.push(ChartDataFlag.MOD);
+                putFloat32(bytes, mod.b);
+                putFloat32(bytes, mod.d);
+                bytes.push(getByteFromEase(mod.e));
+                putFloat32(bytes, mod.v1);
+                putFloat32(bytes, mod.v2);
+                bytes.push(mod.mi);
+                bytes.push((mod.p+256)%256);
+            }
+            for (let mod of this.mods.perFrame) {
+                bytes.push(ChartDataFlag.PERFRAME);
+                putFloat32(bytes, mod.b);
+                putFloat32(bytes, mod.e);
+                putString(bytes, mod.f);
+            }
+            bytes.push(ChartDataFlag.GIMMICK_END);
+            bytes.push(ChartDataFlag.MODS_END);
+        }
+
         bytes.push(ChartDataFlag.END);
         
         let blob = new Blob([new Uint8Array(bytes)]);
