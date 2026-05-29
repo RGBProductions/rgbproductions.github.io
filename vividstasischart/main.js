@@ -1233,3 +1233,8 @@ window.addEventListener("keydown", (e) => {
         chart.updateModTimes();
     }
 })
+
+window.addEventListener("beforeunload", (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+})
