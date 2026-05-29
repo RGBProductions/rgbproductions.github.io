@@ -57,7 +57,7 @@ let zoom = 1;
 let beatSnaps = 4;
 
 let audio = new Audio();
-audio.volume = 0.5;
+audio.volume = localStorage.getItem("vscc_volume") ?? 0.5;
 
 let songInfo = {
     song_name: "Song Name",
@@ -71,7 +71,7 @@ function getNoteY(time) {
     return canvas.height-((time-audio.currentTime)*scrollSpeed*zoom*28+36)*scale;
 }
 
-let scale = 4;
+let scale = localStorage.getItem("vscc_scale") ?? 4;
 
 let offset = 0;
 
@@ -1093,7 +1093,7 @@ function MainDraw() {
     context.fillStyle = "#ffffff80";
     context.textBaseline = "top";
     context.textAlign = "right";
-    context.fillText(`V/SCC v0.0.7`, canvas.width-8*scale, 8*scale);
+    context.fillText(`V/SCC v0.0.8`, canvas.width-8*scale, 8*scale);
 }
 
 function MainLoop() {
@@ -1236,5 +1236,7 @@ window.addEventListener("keydown", (e) => {
 
 window.addEventListener("beforeunload", (e) => {
     e.preventDefault();
+    localStorage.setItem("vscc_scale", scale);
+    localStorage.setItem("vscc_volume", audio.volume);
     e.returnValue = "";
 })
