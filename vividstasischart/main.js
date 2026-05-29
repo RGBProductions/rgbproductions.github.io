@@ -1120,6 +1120,8 @@ window.addEventListener("dragover", (e) => {
     e.preventDefault();
 })
 
+const audioFormats = ["ogg","wav","mp3","mpeg"]
+
 window.addEventListener("drop", (e) => {
     e.preventDefault();
 
@@ -1136,9 +1138,12 @@ window.addEventListener("drop", (e) => {
                 window.chart = chart;
             }
         }
-        if (file.type.startsWith("audio/")) {
-            let url = URL.createObjectURL(file);
-            audio.src = url;
+        for (let format of audioFormats) {
+            if (file.type.endsWith(`/${format}`)) {
+                let url = URL.createObjectURL(file);
+                audio.src = url;
+                break;
+            }
         }
     })
     reader.readAsArrayBuffer(file);
