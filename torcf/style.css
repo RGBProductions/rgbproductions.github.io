@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+    background-color: #272829;
+    color: white;
+}
+
+footer {
+    position: fixed;
+    bottom: 8px;
+}

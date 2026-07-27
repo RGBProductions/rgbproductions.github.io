@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart To RCF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>RCF Chart Converter</h1>
+    Supported formats:
+    <ul>
+        <li>vivid/stasis Binary (.vsb)</li>
+    </ul>
+    <br>
+    Chart File <input id="fileinput" type="file" accept=".vsb">
+    <br>
+    <br>
+    <button disabled="true" id="convertbtn" onclick="convert()">Convert to Recur (.rcf)</button>
+    <script type="module" src="main.js"></script>
+    <footer>TODO: Polish interface; Support more formats</footer>
+</body>
+</html>
