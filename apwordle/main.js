@@ -150,7 +150,11 @@ function endGame(success) {
 window.pressKey = async (k) => {
     let prev = board[row][Math.max(0, Math.min(4, char-1))];
     let cur = board[row][Math.max(0, Math.min(4, char))];
-    if (k == "backspace" || k == "delete") {
+    if (k == "arrowleft") {
+        char = Math.max(0, char-1);
+    } else if (k == "arrowright" || k == "tab") {
+        char = Math.min(4, char+1);
+    } else if (k == "backspace" || k == "delete") {
         char = Math.max(0, char-1);
         prev.innerText = "";
     } else if (k == "enter") {
@@ -159,7 +163,12 @@ window.pressKey = async (k) => {
             word += cell.innerText;
         }
         let result = await Wordle.guess(word.toLowerCase());
-        if (result.type != 0) {
+        if (result.type == 0) {
+            for (let cell of board[row]) {
+                cell.classList.remove("fail");
+                cell.classList.add("fail");
+            }
+        } else {
             if (result.type == 2) {
                 playing = false;
                 setTimeout(() => endGame(true), 750);
@@ -203,7 +212,7 @@ window.pressKey = async (k) => {
 document.addEventListener("keydown", async (e) => {
     if (!playing) return;
 
-    if (e.key == "Enter") e.preventDefault();
+    if (e.key == "Enter" || e.key == "Tab") e.preventDefault();
     window.pressKey(e.key.toLowerCase());
 })
 

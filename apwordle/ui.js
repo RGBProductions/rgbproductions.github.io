@@ -35,6 +35,7 @@ for (let r = 0; r < 6; r++) {
         cell.classList.add("cell");
         cell.addEventListener("animationend", () => {
             cell.classList.remove("fill");
+            cell.classList.remove("fail");
         })
         row.appendChild(cell);
         board[r].push(cell);
