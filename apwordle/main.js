@@ -36,7 +36,7 @@ for (let r = 0; r < board.length; r++) {
             for (let cell of allCells) {
                 cell.classList.remove("selected");
             }
-            if (playing) board[r][c].classList.add("selected");
+            if (playing) board[row][c].classList.add("selected");
         })
     }
 }
