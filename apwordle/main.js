@@ -29,8 +29,7 @@ darkButton.addEventListener("click", () => {
 setDark(dark);
 
 for (let r = 0; r < board.length; r++) {
-    let row = board[r];
-    for (let c = 0; c < row.length; c++) {
+    for (let c = 0; c < board[r].length; c++) {
         board[r][c].addEventListener("click", () => {
             char = c;
             for (let cell of allCells) {
