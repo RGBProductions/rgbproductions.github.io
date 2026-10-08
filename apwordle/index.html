@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archipelago Wordle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="apcolors.css">
+</head>
+<body>
+    <main>
+        <div id="board"></div>
+        <div class="reveal panel hidden" id="word-reveal">
+            <span>The word was</span>
+            <span id="word" class="success">.....</span>
+        </div>
+        <div class="reveal panel hidden" id="hint">
+            <span>Your <span class="ap-item-progression">White Gel</span> is at <span class="ap-location">Shard 10 Fragment Clear 10</span> in <span class="ap-player">Sylvie</span>'s world.</span>
+        </div>
+        <div id="letters" class="hidden">
+            <div>
+                <button class="letter">Q</button>
+                <button class="letter">W</button>
+                <button class="letter">E</button>
+                <button class="letter">R</button>
+                <button class="letter">T</button>
+                <button class="letter">Y</button>
+                <button class="letter">U</button>
+                <button class="letter">I</button>
+                <button class="letter">O</button>
+                <button class="letter">P</button>
+            </div>
+            <div>
+                <button class="letter">A</button>
+                <button class="letter">S</button>
+                <button class="letter">D</button>
+                <button class="letter">F</button>
+                <button class="letter">G</button>
+                <button class="letter">H</button>
+                <button class="letter">J</button>
+                <button class="letter">K</button>
+                <button class="letter">L</button>
+            </div>
+            <div>
+                <button class="letter">Z</button>
+                <button class="letter">X</button>
+                <button class="letter">C</button>
+                <button class="letter">V</button>
+                <button class="letter">B</button>
+                <button class="letter">N</button>
+                <button class="letter">M</button>
+                <button class="letter wide">Enter</button>
+                <button class="letter wide">Delete</button>
+            </div>
+        </div>
+        <div class="hidden"><button>G</button></div>
+        <div id="options-game" style="position: fixed; bottom: 16px;" class="hidden"><button onclick="tryForfeit()">Forfeit</button></div>
+        <div id="options-end" style="position: fixed; bottom: 16px;" class="hidden"><button onclick="startGame()">Play Again</button> <button onclick="exitToMenu()">End Game</button></div>
+    </main>
+    <div id="setup" class="hidden">
+        <div class="panel hidden" id="setup-panel">
+            <h1 style="text-align: center;">Archipelago Wordle</h1>
+            <h2>Archipelago Options</h2>
+            <h3>Ignore these if you are not playing a multiworld</h3>
+            <input id="ap-hostname" type="text" autocomplete="off" placeholder="Hostname" value="archipelago.gg">
+            <input id="ap-port" type="text" autocomplete="off" placeholder="Port" value="38282">
+            <br>
+            <input id="ap-slot" type="text" autocomplete="off" placeholder="Slot">
+            <input id="ap-password" type="password" autocomplete="off" placeholder="Password">
+            <br>
+            <button id="ap-connect" onclick="tryConnectAp()">Connect</button>
+            <br>
+            <br>
+            <button id="play" onclick="startGame()">Play Wordle</button>
+        </div>
+    </div>
+    <div id="forfeit" class="hidden">
+        <div class="panel hidden" id="forfeit-panel">
+            <h1>Do you really want to forfeit?</h1>
+            <h2 id="deathlink-warning" style="color: #FF8080"></h2>
+            <div><button onclick="forfeit()">Yes, Forfeit</button> <button onclick="dontForfeit()">No, Keep Going</button></div>
+        </div>
+    </div>
+    <button id="todark">Dark</button>
+    <script src="main.js" type="module"></script>
+</body>
+</html>
