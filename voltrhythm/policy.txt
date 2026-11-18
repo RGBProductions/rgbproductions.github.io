@@ -4,7 +4,7 @@ All content surrounding VoltRhythm must adhere to this policy. Violating this po
 
 Please look over all sections carefully so you don't accidentally get yourself in trouble.
 
-This policy was last updated on October 14, 2025
+This policy was last updated on November 17, 2026
 
 
 
@@ -32,10 +32,10 @@ YOU MAY NOT PERFORM ANY OF THE FOLLOWING ACTIONS UNDER ANY CIRCUMSTANCES
 
 Using any VoltRhythm content without explicit permission from the creator
 Using any VoltRhythm content to train generative AI models
-Creating content that is NSFW, derogatory, or discriminatory in nature
-Creating custom content using others' work without explicit permission from the creator(s)
-Creating content that violates laws or infringes on other creators' policies
-Abusing loopholes in the content policy to be a nuisance
+Creating content for or related to VoltRhythm that is NSFW, derogatory, or discriminatory in nature
+Creating content for VoltRhythm using others' work without explicit permission from the creator(s)
+Creating content for VoltRhythm that violates laws or infringes on other creators' policies
+Abusing loopholes in the content policy for any reason
 
 
 
